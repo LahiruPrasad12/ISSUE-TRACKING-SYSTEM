@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommentResource;
 use App\Models\Comments;
 use App\Models\Issues;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class CommentController extends Controller
         $comment->body = $request->body;
 
         if($post->comments()->save($comment)){
-            return $comment;
+            return new CommentResource($post);
         }
     }
 

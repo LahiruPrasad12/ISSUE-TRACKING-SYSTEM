@@ -12,8 +12,9 @@ class Issues extends Model
     protected $table = "issues";
     public $timestamps = false;
 
-    public function comments(){
-        return $this->hasMany(Comments::class);
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comments::class,'issue_id');
     }
 
     public function images(){

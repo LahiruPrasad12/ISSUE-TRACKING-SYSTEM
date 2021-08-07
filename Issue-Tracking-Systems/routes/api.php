@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\IssueController;
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //this route used to add data to the Issues table
 Route::post('/issue',[IssueController::class,'store']);
+Route::post('/comment/{id}',[CommentController::class,'store']);
 
 
 
