@@ -29,6 +29,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //this route used to add data to the Issues table
 Route::post('/issue',[IssueController::class,'store']);
+
+//this route used to add data to the Comment table
 Route::post('/comment/{id}',[CommentController::class,'store']);
 
 
@@ -43,8 +45,11 @@ Route::get('/issue/{id}',[IssueController::class,'show']);
 
 
 /*-----------------------------------------Get All Data-----------------------------------------*/
-//this route used to get all data from Issues table
+//This route used to get all data from Issues table
 Route::get('/issue',[IssueController::class,'index']);
+
+//This route used to get all data from Comment table
+Route::get('/comment',[CommentController::class,'index']);
 
 
 /*-----------------------------------------Update Data-----------------------------------------*/

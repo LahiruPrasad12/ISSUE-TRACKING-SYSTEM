@@ -16,7 +16,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $post = Comments::paginate(10);
+        return CommentResource::collection($post);
     }
 
     /**
@@ -42,7 +43,7 @@ class CommentController extends Controller
         $comment->body = $request->body;
 
         if($post->comments()->save($comment)){
-            return new CommentResource($post);
+            return "Post Add Successfully";
         }
     }
 
