@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->text('body');
             $table->bigInteger('issue_id')->unsigned();
-            $table->foreign('issue_id')->references('id')->on('issues');
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
         });
     }
 

@@ -18,4 +18,8 @@ class Issues extends Model
     public function images(){
         return $this->hasMany(Images::class);
     }
+
+    public function category(){
+        return $this->belongsToMany(Category::class);
+    }
 }

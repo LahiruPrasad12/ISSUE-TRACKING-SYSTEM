@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Issue_Categories extends Model
 {
     use HasFactory;
+
 }

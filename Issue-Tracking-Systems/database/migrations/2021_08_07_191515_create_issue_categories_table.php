@@ -13,12 +13,14 @@ class CreateIssueCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('issue__categories', function (Blueprint $table) {
+        Schema::create('issue_categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('issue_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-            $table->foreign('issue_id')->references('id')->on('issues');
-            $table->foreign('category_id')->references('id')->on('categories');
+
+            $table->bigInteger('cat_id')->unsigned();
+            $table->bigInteger('issue_id')->unsigned();
+
+            $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
         });
     }
 

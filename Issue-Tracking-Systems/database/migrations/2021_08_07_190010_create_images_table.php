@@ -23,8 +23,8 @@ class CreateImagesTable extends Migration
             $table->string('extension');
             $table->bigInteger('issue_id')->unsigned();
             $table->bigInteger('comment_id')->unsigned();
-            $table->foreign('issue_id')->references('id')->on('issues');
-            $table->foreign('comment_id')->references('id')->on('comments');
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
 
         });
     }
