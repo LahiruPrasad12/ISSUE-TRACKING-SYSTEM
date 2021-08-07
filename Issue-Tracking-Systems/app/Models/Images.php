@@ -16,7 +16,7 @@ class Images extends Model
         return $this.$this->belongsTo(Issues::class);
     }
 
-    public function comment(): string
+    public function comments(): string
     {
         return $this.$this->belongsTo(Comments::class);
     }
