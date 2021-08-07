@@ -15,4 +15,8 @@ class Subcategories extends Model
     {
         return $this.$this->belongsTo(Category::class);
     }
+
+    public function issues(){
+        return $this->belongsToMany(Issues::class);
+    }
 }
