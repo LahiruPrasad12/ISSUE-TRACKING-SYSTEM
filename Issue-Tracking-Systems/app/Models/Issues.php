@@ -10,4 +10,8 @@ class Issues extends Model
     use HasFactory;
 
     protected $table = "issues";
+
+    public function comments(){
+        return $this->hasMany(Comments::class);
+    }
 }
