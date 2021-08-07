@@ -52,3 +52,4 @@ Route::put('/issue/{id}',[IssueController::class,'update']);
 
 
 /*-----------------------------------------Delete Data-----------------------------------------*/
+Route::delete('/issue/{id}',[IssueController::class,'destroy']);

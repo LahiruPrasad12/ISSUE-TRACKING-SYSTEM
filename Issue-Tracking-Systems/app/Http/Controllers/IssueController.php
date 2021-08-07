@@ -100,6 +100,9 @@ class IssueController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Issues::findOrFail($id);
+        if($post->delete()){
+            return new IssueResource($post);
+        }
     }
 }
