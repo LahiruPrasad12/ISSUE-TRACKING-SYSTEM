@@ -65,3 +65,5 @@ Route::delete('/issue/{id}',[IssueController::class,'destroy']);
 
 
 /*-----------------------------------------get sub table Data using parent id's-----------------------------------------*/
+//This route used to get all comment which under one specific Issue
+Route::get('comments/issue/{id}',[CommentController::class,'getCommentUsingPostId']);
