@@ -15,7 +15,8 @@ class IssueController extends Controller
      */
     public function index()
     {
-        //
+        $post = Issues::paginate(10);
+        return IssueResource::collection($post);
     }
 
     /**

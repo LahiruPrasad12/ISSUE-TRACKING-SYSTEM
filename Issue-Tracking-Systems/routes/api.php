@@ -41,7 +41,8 @@ Route::get('/issue/{id}',[IssueController::class,'show']);
 
 
 /*-----------------------------------------Get All Data-----------------------------------------*/
-
+//this route used to get all data from table
+Route::get('/issue',[IssueController::class,'index']);
 
 
 
