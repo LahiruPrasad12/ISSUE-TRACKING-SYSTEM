@@ -38,8 +38,11 @@ Route::post('/comment/{id}',[CommentController::class,'store']);
 
 /*-----------------------------------------Get One Data-----------------------------------------*/
 
-//this route used to get specific data from Issues table
+//This route used to get specific data from Issues table
 Route::get('/issue/{id}',[IssueController::class,'show']);
+
+////This route used to get specific data from Comment table
+Route::get('/comment/{id}',[CommentController::class,'show']);
 
 
 

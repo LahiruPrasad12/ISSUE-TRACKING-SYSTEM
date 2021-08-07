@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comments;
 use App\Models\Issues;
@@ -36,7 +37,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(CommentRequest $request, $id)
     {
         $post = Issues::find($id);
         $comment = new Comments();
@@ -55,7 +56,8 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Comments::findOrfail($id);
+        return new CommentResource($post);
     }
 
     /**
@@ -76,7 +78,7 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CommentRequest $request, $id)
     {
         //
     }
