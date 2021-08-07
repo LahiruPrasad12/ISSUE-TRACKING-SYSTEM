@@ -56,9 +56,11 @@ Route::get('/comment',[CommentController::class,'index']);
 
 
 /*-----------------------------------------Update Data-----------------------------------------*/
+//This controller is used to update issue table data
 Route::put('/issue/{id}',[IssueController::class,'update']);
 
-
+//This controller is used to update comment table data
+Route::put('/comment/{id}',[CommentController::class,'update']);
 
 
 /*-----------------------------------------Delete Data-----------------------------------------*/

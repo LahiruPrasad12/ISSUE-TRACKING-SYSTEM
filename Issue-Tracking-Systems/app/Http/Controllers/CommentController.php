@@ -80,7 +80,12 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, $id)
     {
-        //
+        $post = Comments::findOrFail($id);
+        $post->body = $request->body;
+
+        if($post->save()){
+            return new CommentResource($post);
+        }
     }
 
     /**
