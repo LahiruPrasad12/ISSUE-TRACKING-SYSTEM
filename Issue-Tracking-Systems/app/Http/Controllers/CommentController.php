@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
+use App\Models\Issues;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -32,9 +34,15 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $post = Issues::find($id);
+        $comment = new Comments();
+        $comment->body = $request->body;
+
+        if($post->comments()->save($comment)){
+            return $comment;
+        }
     }
 
     /**
