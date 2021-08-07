@@ -15,4 +15,8 @@ class Comments extends Model
     {
         return $this.$this->belongsTo(Issues::class);
     }
+
+    public function images(){
+        return $this->hasMany(Images::class);
+    }
 }

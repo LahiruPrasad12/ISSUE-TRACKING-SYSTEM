@@ -15,7 +15,17 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('imagable_type');
+            $table->string('imagable_id');
+            $table->integer('size');
+            $table->string('path');
+            $table->string('name');
+            $table->string('extension');
+            $table->bigInteger('issue_id')->unsigned();
+            $table->bigInteger('comment_id')->unsigned();
+            $table->foreign('issue_id')->references('id')->on('issues');
+            $table->foreign('comment_id')->references('id')->on('comments');
+
         });
     }
 

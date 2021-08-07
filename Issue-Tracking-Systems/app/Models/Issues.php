@@ -14,4 +14,8 @@ class Issues extends Model
     public function comments(){
         return $this->hasMany(Comments::class);
     }
+
+    public function images(){
+        return $this->hasMany(Images::class);
+    }
 }
