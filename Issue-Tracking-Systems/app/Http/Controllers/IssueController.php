@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IssueRequest;
 use App\Http\Resources\IssueResource;
 use App\Models\Issues;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class IssueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IssueRequest $request)
     {
         $post = new Issues();
         $post->title = $request->title;
@@ -79,7 +80,7 @@ class IssueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IssueRequest $request, $id)
     {
         $post = Issues::findOrFail($id);
         $post->title = $request->title;
