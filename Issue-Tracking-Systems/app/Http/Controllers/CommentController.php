@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\IssueResource;
-use App\Models\Issues;
 use Illuminate\Http\Request;
 
-class IssueController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,16 +34,7 @@ class IssueController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Issues();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->uuid = $request->uuid;
-        $post->slug = $request->slug;
-
-
-        if($post->save()){
-            return new IssueResource($post);
-        }
+        //
     }
 
     /**
@@ -56,8 +45,7 @@ class IssueController extends Controller
      */
     public function show($id)
     {
-        $post = Issues::findOrfail($id);
-        return new IssueResource($post);
+        //
     }
 
     /**

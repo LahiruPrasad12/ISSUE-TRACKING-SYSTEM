@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+use \App\Http\Controllers\IssueController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +19,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+
+
+/*-----------------------------------------Add Data-----------------------------------------*/
+
+//this route used to add issue to the database
+Route::post('/issue',[IssueController::class,'store']);
+
+
+
+
+/*-----------------------------------------Get One Data-----------------------------------------*/
+Route::get('/issue/{id}',[IssueController::class,'show']);
