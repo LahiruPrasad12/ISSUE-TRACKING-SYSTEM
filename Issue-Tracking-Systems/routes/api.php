@@ -33,4 +33,17 @@ Route::post('/issue',[IssueController::class,'store']);
 
 
 /*-----------------------------------------Get One Data-----------------------------------------*/
+
+//this route used to get specific data from table
 Route::get('/issue/{id}',[IssueController::class,'show']);
+
+
+
+
+/*-----------------------------------------Get All Data-----------------------------------------*/
+
+
+
+
+
+/*-----------------------------------------Delete Data-----------------------------------------*/
