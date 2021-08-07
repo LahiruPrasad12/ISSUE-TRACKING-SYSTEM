@@ -96,7 +96,10 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Comments::findOrFail($id);
+        if($post->delete()){
+            return new CommentResource($post);
+        }
     }
 
 

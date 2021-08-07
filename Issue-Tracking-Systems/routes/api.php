@@ -64,7 +64,11 @@ Route::put('/comment/{id}',[CommentController::class,'update']);
 
 
 /*-----------------------------------------Delete Data-----------------------------------------*/
+//This route used to delete issue table data
 Route::delete('/issue/{id}',[IssueController::class,'destroy']);
+
+//This route used to delete comment table data
+Route::delete('/comment/{id}',[CommentController::class,'destroy']);
 
 
 
