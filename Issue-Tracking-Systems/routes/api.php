@@ -26,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 /*-----------------------------------------Add Data-----------------------------------------*/
 
-//this route used to add issue to the database
+//this route used to add data to the Issues table
 Route::post('/issue',[IssueController::class,'store']);
 
 
@@ -34,15 +34,19 @@ Route::post('/issue',[IssueController::class,'store']);
 
 /*-----------------------------------------Get One Data-----------------------------------------*/
 
-//this route used to get specific data from table
+//this route used to get specific data from Issues table
 Route::get('/issue/{id}',[IssueController::class,'show']);
 
 
 
 
 /*-----------------------------------------Get All Data-----------------------------------------*/
-//this route used to get all data from table
+//this route used to get all data from Issues table
 Route::get('/issue',[IssueController::class,'index']);
+
+
+/*-----------------------------------------Update Data-----------------------------------------*/
+Route::put('/issue/{id}',[IssueController::class,'update']);
 
 
 

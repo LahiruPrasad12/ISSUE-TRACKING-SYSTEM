@@ -81,7 +81,15 @@ class IssueController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Issues::findOrFail($id);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->uuid = $request->uuid;
+        $post->slug = $request->slug;;
+
+        if($post->save()){
+            return new IssueResource($post);
+        }
     }
 
     /**
