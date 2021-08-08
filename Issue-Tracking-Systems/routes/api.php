@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-
+use \App\Http\Controllers\CategoryController;
 use \App\Http\Controllers\ImageController;
 use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\IssueController;
@@ -38,6 +38,8 @@ Route::post('/comment/{id}',[CommentController::class,'store']);
 //this route used to add data to the Image table
 Route::post('/image/{id1}/{id2}',[ImageController::class,'store']);
 
+//this route used to add data to the Issues table
+Route::post('/category',[CategoryController::class,'store']);
 
 
 /*-----------------------------------------Get One Data-----------------------------------------*/
