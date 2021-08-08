@@ -47,11 +47,14 @@ Route::post('/category',[CategoryController::class,'store']);
 //This route used to get specific data from Issues table
 Route::get('/issue/{id}',[IssueController::class,'show']);
 
-////This route used to get specific data from Comment table
+//This route used to get specific data from Comment table
 Route::get('/comment/{id}',[CommentController::class,'show']);
 
-////This route used to get specific data from Images table
+//This route used to get specific data from Images table
 Route::get('/image/{id}',[ImageController::class,'show']);
+
+//This route used to get specific data from Images table
+Route::get('/category/{id}',[CategoryController::class,'show']);
 
 
 /*-----------------------------------------Get All Data-----------------------------------------*/
@@ -63,6 +66,9 @@ Route::get('/comment',[CommentController::class,'index']);
 
 //This route used to get all data from Images table
 Route::get('/image',[ImageController::class,'index']);
+
+//This route used to get all data from category table
+Route::get('/category',[CategoryController::class,'index']);
 
 
 /*-----------------------------------------Update Data-----------------------------------------*/
