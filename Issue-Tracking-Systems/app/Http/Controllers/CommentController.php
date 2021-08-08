@@ -44,7 +44,7 @@ class CommentController extends Controller
         $comment->body = $request->body;
 
         if($post->comments()->save($comment)){
-            return "Post Add Successfully";
+            return new CommentResource($comment);
         }
     }
 
