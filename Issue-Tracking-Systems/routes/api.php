@@ -99,7 +99,8 @@ Route::put('/image/{id}',[ImageController::class,'update']);
 //This controller is used to update category table data
 Route::put('/category/{id}',[CategoryController::class,'update']);
 
-
+//This controller is used to update sub category table data
+Route::put('/subCategory/{id}',[SubCategoryController::class,'update']);
 
 
 
