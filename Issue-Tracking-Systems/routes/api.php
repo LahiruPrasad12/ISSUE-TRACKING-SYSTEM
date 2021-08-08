@@ -61,6 +61,8 @@ Route::get('/image/{id}',[ImageController::class,'show']);
 //This route used to get specific data from category table
 Route::get('/category/{id}',[CategoryController::class,'show']);
 
+//This route used to get specific data from sub category table
+Route::get('/subCategory/{id}',[SubCategoryController::class,'show']);
 
 
 
@@ -96,6 +98,8 @@ Route::put('/image/{id}',[ImageController::class,'update']);
 
 //This controller is used to update category table data
 Route::put('/category/{id}',[CategoryController::class,'update']);
+
+
 
 
 

@@ -64,7 +64,8 @@ class SubCategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Subcategories::findOrfail($id);
+        return new SubCategoryResource($post);
     }
 
     /**
