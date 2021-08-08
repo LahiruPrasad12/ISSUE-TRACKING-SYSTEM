@@ -48,7 +48,7 @@ Route::get('/issue/{id}',[IssueController::class,'show']);
 ////This route used to get specific data from Comment table
 Route::get('/comment/{id}',[CommentController::class,'show']);
 
-////This route used to get specific data from Comment table
+////This route used to get specific data from Images table
 Route::get('/image/{id}',[ImageController::class,'show']);
 
 
@@ -59,7 +59,7 @@ Route::get('/issue',[IssueController::class,'index']);
 //This route used to get all data from Comment table
 Route::get('/comment',[CommentController::class,'index']);
 
-//This route used to get all data from Comment table
+//This route used to get all data from Images table
 Route::get('/image',[ImageController::class,'index']);
 
 
@@ -69,6 +69,9 @@ Route::put('/issue/{id}',[IssueController::class,'update']);
 
 //This controller is used to update comment table data
 Route::put('/comment/{id}',[CommentController::class,'update']);
+
+//This controller is used to update comment table data
+Route::put('/image/{id}',[ImageController::class,'update']);
 
 
 /*-----------------------------------------Delete Data-----------------------------------------*/

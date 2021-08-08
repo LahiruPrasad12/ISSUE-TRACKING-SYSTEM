@@ -92,13 +92,18 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $issue_id, $comment_id)
+    public function update(Request $request,$id)
     {
-        $post = Images::findOrFail($id);
-        $post->body = $request->body;
+        $comment = Images::findOrFail($id);
+        $comment->imagable_type = $request->imagable_type;
+        $comment->imagable_id = $request->imagable_id;
+        $comment->size = $request->size;
+        $comment->path = $request->path;
+        $comment->name = $request->name;
+        $comment->extension = $request->extension;
 
-        if($post->save()){
-            return new ImageResource($post);
+        if($comment->save()){
+            return new ImageResource($comment);
         }
     }
 
