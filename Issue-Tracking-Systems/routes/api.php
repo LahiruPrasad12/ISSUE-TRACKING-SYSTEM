@@ -70,7 +70,7 @@ Route::put('/issue/{id}',[IssueController::class,'update']);
 //This controller is used to update comment table data
 Route::put('/comment/{id}',[CommentController::class,'update']);
 
-//This controller is used to update comment table data
+//This controller is used to update image table data
 Route::put('/image/{id}',[ImageController::class,'update']);
 
 
@@ -81,9 +81,16 @@ Route::delete('/issue/{id}',[IssueController::class,'destroy']);
 //This route used to delete comment table data
 Route::delete('/comment/{id}',[CommentController::class,'destroy']);
 
-
+//This route used to delete comment table data
+Route::delete('/image/{id}',[ImageController::class,'destroy']);
 
 
 /*-----------------------------------------get sub table Data using parent id's-----------------------------------------*/
 //This route used to get all comment which under one specific Issue
 Route::get('comments/issue/{id}',[CommentController::class,'getCommentUsingPostId']);
+
+//This route used to get all images which under one specific Issue
+Route::get('image/issue/{id}',[ImageController::class,'getImageUsingIssueId']);
+
+//This route used to get all images which under one specific Comment
+Route::get('image/comment/{id}',[ImageController::class,'getImageUsingCommentId']);

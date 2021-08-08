@@ -18,7 +18,7 @@ class Comments extends Model
     }
 
     public function images(){
-        return $this->hasMany(Images::class);
+        return $this->hasMany(Images::class,'comment_id');
     }
 
 

@@ -18,7 +18,7 @@ class Issues extends Model
     }
 
     public function images(){
-        return $this->hasMany(Images::class);
+        return $this->hasMany(Images::class,'issue_id');
     }
 
     public function category(){
