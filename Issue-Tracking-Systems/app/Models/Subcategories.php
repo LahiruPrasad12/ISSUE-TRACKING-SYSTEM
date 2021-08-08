@@ -10,6 +10,7 @@ class Subcategories extends Model
     use HasFactory;
 
     protected $table = "subcategories";
+    public $timestamps = false;
 
     public function category(): string
     {

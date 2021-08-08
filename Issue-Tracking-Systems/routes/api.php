@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use \App\Http\Controllers\CategoryController;
+use \App\Http\Controllers\SubCategoryController;
 use \App\Http\Controllers\ImageController;
 use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\IssueController;
@@ -41,7 +42,8 @@ Route::post('/image/{id1}/{id2}',[ImageController::class,'store']);
 //this route used to add data to the category table
 Route::post('/category',[CategoryController::class,'store']);
 
-
+//this route used to add data to the sub category table
+Route::post('/subCategory/{id}',[SubCategoryController::class,'store']);
 
 
 

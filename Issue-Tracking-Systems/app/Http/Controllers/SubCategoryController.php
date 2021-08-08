@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubCategoryRequest;
+use App\Models\Category;
+use App\Models\Subcategories;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -32,9 +35,16 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubCategoryRequest $request, $id)
     {
-        //
+        $post = Category::find($id);
+        $comment = new Subcategories();
+        $comment->name = $request->name;
+        $comment->description = $request->description;
+
+        if($post->subCategory()->save($comment)){
+            return "Sub Category Add Successfully";
+        }
     }
 
     /**

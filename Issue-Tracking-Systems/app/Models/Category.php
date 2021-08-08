@@ -12,11 +12,13 @@ class Category extends Model
     protected $table = "categories";
     public $timestamps = false;
 
-    public function subCategory(){
-        return $this->hasMany(Subcategories::class);
+    public function subCategory(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Subcategories::class,'cat_ID');
     }
 
-    public function issues(){
+    public function issues(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(Issues::class);
     }
 }
