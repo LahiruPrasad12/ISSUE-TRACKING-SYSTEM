@@ -122,14 +122,14 @@ class ImageController extends Controller
     }
 
 
-    //This function return all posts of one specific Issue
+    //This function return all images of one specific Issue
     public function getImageUsingIssueId($id){
         $image = Issues::find($id)->images;
         return $image;
     }
 
 
-    //This function return all posts of one specific Issue
+    //This function return all images of one specific comment
     public function getImageUsingCommentId($id){
         $image = Comments::find($id)->images;
         return $image;
