@@ -38,7 +38,7 @@ Route::post('/comment/{id}',[CommentController::class,'store']);
 //this route used to add data to the Image table
 Route::post('/image/{id1}/{id2}',[ImageController::class,'store']);
 
-//this route used to add data to the Issues table
+//this route used to add data to the category table
 Route::post('/category',[CategoryController::class,'store']);
 
 
@@ -53,7 +53,7 @@ Route::get('/comment/{id}',[CommentController::class,'show']);
 //This route used to get specific data from Images table
 Route::get('/image/{id}',[ImageController::class,'show']);
 
-//This route used to get specific data from Images table
+//This route used to get specific data from category table
 Route::get('/category/{id}',[CategoryController::class,'show']);
 
 
@@ -80,6 +80,9 @@ Route::put('/comment/{id}',[CommentController::class,'update']);
 
 //This controller is used to update image table data
 Route::put('/image/{id}',[ImageController::class,'update']);
+
+//This controller is used to update category table data
+Route::put('/category/{id}',[CategoryController::class,'update']);
 
 
 /*-----------------------------------------Delete Data-----------------------------------------*/

@@ -76,9 +76,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $post = Category::findOrFail($id);
+        $post->name = $request->name;
+        $post->description = $request->description;
+
+        if($post->save()){
+            return new CategoryResource($post);
+        }
     }
 
     /**
