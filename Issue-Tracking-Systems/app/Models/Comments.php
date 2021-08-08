@@ -16,11 +16,13 @@ class Comments extends Model
         'body','issue_id'
     ];
 
+    //This method used to make one to many relationship with issues and comment models
     public function issues(): string
     {
         return $this.$this->belongsTo(Issues::class);
     }
 
+    //This method used to make one to many relationship with comment and  images model
     public function images(){
         return $this->hasMany(Images::class,'comment_id');
     }

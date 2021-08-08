@@ -38,7 +38,7 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImageRequest $request, $issue_id, $comment_id)
+    public function store(ImageRequest $request, $issue_id)
     {
 
         $comment = new Images($request->all());
@@ -49,8 +49,8 @@ class ImageController extends Controller
 //        $comment->name = $request->name;
 //        $comment->extension = $request->extension;
 
-        $comment->issues()->associate($issue_id);
-        $comment->comments()->associate($comment_id);
+//        $comment->issues()->associate($issue_id);
+//        $comment->comments()->associate($comment_id);
 
         $comment->save();
 

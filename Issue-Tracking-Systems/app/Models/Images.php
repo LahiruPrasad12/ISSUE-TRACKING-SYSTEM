@@ -16,11 +16,13 @@ class Images extends Model
         'imagable_type','imagable_id','size','path','name','extension','issue_id','comment_id'
     ];
 
+    //This method used to make one to many relationship with issue and  image model
     public function issues()
     {
         return $this.$this->belongsTo(Issues::class,'issue_id');
     }
 
+    //This method used to make one to many relationship with comment and  images model
     public function comments()
     {
         return $this.$this->belongsTo(Comments::class,'comment_id');

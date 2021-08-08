@@ -17,19 +17,25 @@ class Issues extends Model
         'title','body','uuid','slug'
     ];
 
+    //This method used to make one to many relationship with issue and  comment model
     public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comments::class,'issue_id');
     }
 
+
+    //This method used to make one to many relationship with issue and  images model
     public function images(){
         return $this->hasMany(Images::class,'issue_id');
     }
 
+
+    //This method used to make many to many relationship with category and  issues model
     public function category(){
         return $this->belongsToMany(Category::class);
     }
 
+    //This method used to make many to many relationship with sub category and  issues model
     public function Subcategory(){
         return $this->belongsToMany(Subcategories::class);
     }

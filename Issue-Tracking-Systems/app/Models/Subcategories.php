@@ -18,11 +18,14 @@ class Subcategories extends Model
     ];
 
 
+    //This method used to make one to many relationship with category and  sub category model
     public function category(): string
     {
         return $this.$this->belongsTo(Category::class,'');
     }
 
+
+    //This method used to make many to many relationship with sub category and  issues model
     public function issues(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Issues::class,'issue__subcategories','cat_id','issue_id');
