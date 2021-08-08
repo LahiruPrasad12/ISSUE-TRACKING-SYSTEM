@@ -13,7 +13,7 @@ class ImageRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ImageRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'imagable_type' => 'required',
+            'imagable_id' => 'required',
+            'size' => 'required',
+            'path' => 'required',
+            'name' => 'required',
+            'extension' => 'required',
+            'issue_id' => 'required',
+            'comment_id' => 'required'
         ];
     }
 }

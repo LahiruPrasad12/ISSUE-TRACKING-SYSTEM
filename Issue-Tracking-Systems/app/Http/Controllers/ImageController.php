@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageRequest;
 use App\Http\Resources\ImageResource;
 use App\Models\Comments;
 use App\Models\Images;
@@ -37,7 +38,7 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $issue_id, $comment_id)
+    public function store(ImageRequest $request, $issue_id, $comment_id)
     {
 
         $comment = new Images($request->all());
@@ -92,7 +93,7 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(ImageRequest $request,$id)
     {
         $comment = Images::findOrFail($id);
         $comment->imagable_type = $request->imagable_type;
