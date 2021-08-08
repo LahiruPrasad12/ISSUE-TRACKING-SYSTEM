@@ -133,3 +133,6 @@ Route::get('image/issue/{id}',[ImageController::class,'getImageUsingIssueId']);
 
 //This route used to get all images which under one specific Comment
 Route::get('image/comment/{id}',[ImageController::class,'getImageUsingCommentId']);
+
+//This route used to get all images which under one specific Comment
+Route::get('subCategory/category/{id}',[SubCategoryController::class,'getsubCategoryUsingCategoryID']);

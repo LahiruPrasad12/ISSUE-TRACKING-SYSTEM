@@ -110,4 +110,11 @@ class SubCategoryController extends Controller
             return new SubCategoryResource($post);
         }
     }
+
+
+    //This function return all sub categories of one specific categories
+    public function getsubCategoryUsingCategoryID($id){
+        $comment = Category::find($id)->subCategory;
+        return $comment;
+    }
 }

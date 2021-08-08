@@ -17,6 +17,7 @@ class SubCategoryResource extends JsonResource
         return [
             'Id' => $this->id,
             'Name' => $this->name,
+            'description' => $this->description,
             'Category_Id' => $this->cat_ID
 
         ];
