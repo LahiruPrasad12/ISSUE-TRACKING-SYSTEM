@@ -119,7 +119,8 @@ Route::delete('/image/{id}',[ImageController::class,'destroy']);
 //This route used to delete category table data
 Route::delete('/category/{id}',[CategoryController::class,'destroy']);
 
-
+//This route used to delete category table data
+Route::delete('/subCategory/{id}',[SubCategoryController::class,'destroy']);
 
 
 

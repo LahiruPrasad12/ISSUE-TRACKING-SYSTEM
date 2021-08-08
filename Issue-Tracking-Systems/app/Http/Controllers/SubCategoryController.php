@@ -38,7 +38,7 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id1)
+    public function store(SubCategoryRequest $request, $id1)
     {
         $post = Category::find($id1);
         $issue = Issues::first();
@@ -105,6 +105,9 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Subcategories::findOrFail($id);
+        if($post->delete()){
+            return new SubCategoryResource($post);
+        }
     }
 }
