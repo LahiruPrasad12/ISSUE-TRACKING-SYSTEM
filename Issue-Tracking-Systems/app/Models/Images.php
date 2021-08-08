@@ -11,13 +11,18 @@ class Images extends Model
 
     protected $table = "images";
 
-    public function issues(): string
+    protected $fillable = [
+        'imagable_type', 'imagable_id'
+    ];
+
+    public function issues()
     {
-        return $this.$this->belongsTo(Issues::class);
+        return $this.$this->belongsTo(Issues::class,'issue_id');
     }
 
-    public function comments(): string
+    public function comments()
     {
-        return $this.$this->belongsTo(Comments::class);
+        return $this.$this->belongsTo(Comments::class,'comment_id');
     }
+
 }

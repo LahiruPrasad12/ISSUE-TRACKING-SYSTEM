@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ImageResource;
 use App\Models\Comments;
 use App\Models\Images;
 use App\Models\Issues;
@@ -16,7 +17,8 @@ class ImageController extends Controller
      */
     public function index()
     {
-
+        $post = Images::paginate(10);
+        return ImageResource::collection($post);
     }
 
     /**
@@ -35,21 +37,29 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id1, $id2)
+    public function store(Request $request, $issue_id, $comment_id)
     {
-        $post1 = Comments::find($id1);
-        $post2 = Issues::find($id2);
-        $comment = new Images();
-        $comment->imagable_type = $request->imagable_type;
-        $comment->imagable_id = $request->imagable_id;
-        $comment->size = $request->size;
-        $comment->path = $request->path;
-        $comment->name = $request->name;
-        $comment->extension = $request->extension;
 
-        if($post1->images()->$post2->image()->save($comment)){
-            return "Image Add Successfully";
-        }
+        $comment = new Images($request->all());
+//        $comment->imagable_type = $request->imagable_type;
+//        $comment->imagable_id = $request->imagable_id;
+//        $comment->size = $request->size;
+//        $comment->path = $request->path;
+//        $comment->name = $request->name;
+//        $comment->extension = $request->extension;
+
+        $comment->issues()->associate($issue_id);
+        $comment->comments()->associate($comment_id);
+
+        $comment->save();
+
+
+
+
+
+
+
+
     }
 
     /**
@@ -60,8 +70,7 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        $post = Images::findOrfail($id);
-        return new CommentResource($post);
+
     }
 
     /**
@@ -82,13 +91,13 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $issue_id, $comment_id)
     {
         $post = Images::findOrFail($id);
         $post->body = $request->body;
 
         if($post->save()){
-            return new CommentResource($post);
+            return new ImageResource($post);
         }
     }
 
@@ -100,6 +109,16 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Images::findOrFail($id);
+        if($post->delete()){
+            return new ImageResource($post);
+        }
+    }
+
+
+    //This function return all posts of one specific Issue
+    public function getCommentUsingPostId($id){
+        $image = Issues::find($id)->images;
+        return $image;
     }
 }

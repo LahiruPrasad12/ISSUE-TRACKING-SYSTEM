@@ -58,6 +58,9 @@ Route::get('/issue',[IssueController::class,'index']);
 //This route used to get all data from Comment table
 Route::get('/comment',[CommentController::class,'index']);
 
+//This route used to get all data from Comment table
+Route::get('/image',[ImageController::class,'index']);
+
 
 /*-----------------------------------------Update Data-----------------------------------------*/
 //This controller is used to update issue table data

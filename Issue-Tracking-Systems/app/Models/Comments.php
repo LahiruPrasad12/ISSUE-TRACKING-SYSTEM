@@ -20,4 +20,7 @@ class Comments extends Model
     public function images(){
         return $this->hasMany(Images::class);
     }
+
+
+
 }

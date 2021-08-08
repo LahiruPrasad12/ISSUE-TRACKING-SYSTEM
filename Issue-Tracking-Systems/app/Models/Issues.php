@@ -28,4 +28,8 @@ class Issues extends Model
     public function Subcategory(){
         return $this->belongsToMany(Subcategories::class);
     }
+
+
+
+
 }
