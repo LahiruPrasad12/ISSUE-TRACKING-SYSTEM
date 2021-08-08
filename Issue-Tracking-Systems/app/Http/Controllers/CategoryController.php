@@ -95,6 +95,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Category::findOrFail($id);
+        if($post->delete()){
+            return new CategoryResource($post);
+        }
     }
 }

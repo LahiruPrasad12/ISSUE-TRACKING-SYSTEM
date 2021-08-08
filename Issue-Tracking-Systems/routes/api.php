@@ -42,6 +42,9 @@ Route::post('/image/{id1}/{id2}',[ImageController::class,'store']);
 Route::post('/category',[CategoryController::class,'store']);
 
 
+
+
+
 /*-----------------------------------------Get One Data-----------------------------------------*/
 
 //This route used to get specific data from Issues table
@@ -55,6 +58,9 @@ Route::get('/image/{id}',[ImageController::class,'show']);
 
 //This route used to get specific data from category table
 Route::get('/category/{id}',[CategoryController::class,'show']);
+
+
+
 
 
 /*-----------------------------------------Get All Data-----------------------------------------*/
@@ -71,6 +77,9 @@ Route::get('/image',[ImageController::class,'index']);
 Route::get('/category',[CategoryController::class,'index']);
 
 
+
+
+
 /*-----------------------------------------Update Data-----------------------------------------*/
 //This controller is used to update issue table data
 Route::put('/issue/{id}',[IssueController::class,'update']);
@@ -85,6 +94,9 @@ Route::put('/image/{id}',[ImageController::class,'update']);
 Route::put('/category/{id}',[CategoryController::class,'update']);
 
 
+
+
+
 /*-----------------------------------------Delete Data-----------------------------------------*/
 //This route used to delete issue table data
 Route::delete('/issue/{id}',[IssueController::class,'destroy']);
@@ -94,6 +106,12 @@ Route::delete('/comment/{id}',[CommentController::class,'destroy']);
 
 //This route used to delete comment table data
 Route::delete('/image/{id}',[ImageController::class,'destroy']);
+
+//This route used to delete category table data
+Route::delete('/category/{id}',[CategoryController::class,'destroy']);
+
+
+
 
 
 /*-----------------------------------------get sub table Data using parent id's-----------------------------------------*/
