@@ -70,7 +70,8 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-
+        $post = Images::findOrfail($id);
+        return new ImageResource($post);
     }
 
     /**

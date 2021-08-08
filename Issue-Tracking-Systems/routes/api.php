@@ -48,7 +48,8 @@ Route::get('/issue/{id}',[IssueController::class,'show']);
 ////This route used to get specific data from Comment table
 Route::get('/comment/{id}',[CommentController::class,'show']);
 
-
+////This route used to get specific data from Comment table
+Route::get('/image/{id}',[ImageController::class,'show']);
 
 
 /*-----------------------------------------Get All Data-----------------------------------------*/
