@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubCategoryRequest;
+use App\Http\Resources\SubCategoryResource;
 use App\Models\Category;
 use App\Models\Subcategories;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $post = Subcategories::paginate(10);
+        return SubCategoryResource::collection($post);
     }
 
     /**

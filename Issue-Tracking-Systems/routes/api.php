@@ -78,6 +78,8 @@ Route::get('/image',[ImageController::class,'index']);
 //This route used to get all data from category table
 Route::get('/category',[CategoryController::class,'index']);
 
+//This route used to get all data from sub category table
+Route::get('/subCategory',[SubCategoryController::class,'index']);
 
 
 
