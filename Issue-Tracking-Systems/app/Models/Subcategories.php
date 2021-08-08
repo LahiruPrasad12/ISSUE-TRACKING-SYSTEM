@@ -21,7 +21,7 @@ class Subcategories extends Model
     //This method used to make one to many relationship with category and  sub category model
     public function category(): string
     {
-        return $this.$this->belongsTo(Category::class,'');
+        return $this.$this->belongsTo(Category::class);
     }
 
 

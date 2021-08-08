@@ -48,11 +48,9 @@ class SubCategoryController extends Controller
         $comment->description = $request->description;
 
         if($post->subCategory()->save($comment)){
-//            $roleids = [$issue,$sub];
-//            $comment->issues()->attach($roleids);
 
             $sub->issues()->attach($issue);
-            return "Sub Category Add Successfully";
+            return new SubCategoryResource($comment);
         }
     }
 

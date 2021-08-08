@@ -38,21 +38,26 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImageRequest $request, $issue_id)
+    public function store(ImageRequest $request, $id)
     {
 
-        $comment = new Images($request->all());
-//        $comment->imagable_type = $request->imagable_type;
-//        $comment->imagable_id = $request->imagable_id;
-//        $comment->size = $request->size;
-//        $comment->path = $request->path;
-//        $comment->name = $request->name;
-//        $comment->extension = $request->extension;
+          $post = Comments::find($id);
+          $comment = new Images();
+          $comment->imagable_type = $request->imagable_type;
+          $comment->imagable_id = $request->imagable_id;
+          $comment->size = $request->size;
+          $comment->path = $request->path;
+          $comment->name = $request->name;
+          $comment->extension = $request->extension;
+          $comment->issue_id = 2;
+          $comment->comment_id = $id;
 
-//        $comment->issues()->associate($issue_id);
-//        $comment->comments()->associate($comment_id);
 
-        $comment->save();
+        if($post->images()->save($comment)){
+            return new ImageResource($comment);
+        }
+
+
 
 
 

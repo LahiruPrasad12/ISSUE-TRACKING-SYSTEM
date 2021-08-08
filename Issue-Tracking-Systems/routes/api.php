@@ -37,7 +37,7 @@ Route::post('/issue',[IssueController::class,'store']);
 Route::post('/comment/{id}',[CommentController::class,'store']);
 
 //this route used to add data to the Image table
-Route::post('/image/{id1}/{id2}',[ImageController::class,'store']);
+Route::post('/image/{id}',[ImageController::class,'store']);
 
 //this route used to add data to the category table
 Route::post('/category',[CategoryController::class,'store']);
