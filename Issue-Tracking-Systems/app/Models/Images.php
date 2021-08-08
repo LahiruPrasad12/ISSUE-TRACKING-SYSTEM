@@ -10,8 +10,11 @@ class Images extends Model
     use HasFactory;
 
     protected $table = "images";
-
     public $timestamps = false;
+
+    protected $fillable = [
+        'imagable_type','imagable_id','size','path','name','extension','issue_id','comment_id'
+    ];
 
     public function issues()
     {

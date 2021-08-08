@@ -12,6 +12,10 @@ class Category extends Model
     protected $table = "categories";
     public $timestamps = false;
 
+    protected $fillable = [
+        'name', 'description'
+    ];
+
     public function subCategory(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Subcategories::class,'cat_ID');

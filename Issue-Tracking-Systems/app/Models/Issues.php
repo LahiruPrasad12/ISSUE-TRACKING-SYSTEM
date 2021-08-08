@@ -12,6 +12,11 @@ class Issues extends Model
     protected $table = "issues";
     public $timestamps = false;
 
+
+    protected $fillable = [
+        'title','body','uuid','slug'
+    ];
+
     public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comments::class,'issue_id');

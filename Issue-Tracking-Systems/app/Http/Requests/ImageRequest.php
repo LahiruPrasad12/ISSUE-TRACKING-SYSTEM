@@ -29,9 +29,7 @@ class ImageRequest extends FormRequest
             'size' => 'required',
             'path' => 'required',
             'name' => 'required',
-            'extension' => 'required',
-            'issue_id' => 'required',
-            'comment_id' => 'required'
+            'extension' => 'required'
         ];
     }
 }

@@ -10,4 +10,8 @@ class Issue_Categories extends Model
     use HasFactory;
 
     protected $table = "issue_categories";
+
+    protected $fillable = [
+        'cat_id','issue_id'
+    ];
 }

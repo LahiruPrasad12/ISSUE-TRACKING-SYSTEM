@@ -12,6 +12,10 @@ class Comments extends Model
     protected $table = "comments";
     public $timestamps = false;
 
+    protected $fillable = [
+        'body','issue_id'
+    ];
+
     public function issues(): string
     {
         return $this.$this->belongsTo(Issues::class);

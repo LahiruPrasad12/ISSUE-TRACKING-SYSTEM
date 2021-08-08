@@ -12,6 +12,12 @@ class Subcategories extends Model
     protected $table = "subcategories";
     public $timestamps = false;
 
+
+    protected $fillable = [
+        'name','description','cat_ID'
+    ];
+
+
     public function category(): string
     {
         return $this.$this->belongsTo(Category::class,'');
