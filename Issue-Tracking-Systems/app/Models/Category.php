@@ -19,6 +19,6 @@ class Category extends Model
 
     public function issues(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Issues::class);
+        return $this->belongsToMany(Issues::class,'issue_categories','cat_id','issue_id');
     }
 }

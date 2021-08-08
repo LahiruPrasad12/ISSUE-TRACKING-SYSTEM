@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Issues;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
 class CategoryController extends Controller
@@ -38,10 +39,14 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $post = new Category();
+        $issue = Issues::first();
+        $cat = Category::first();
         $post->name = $request->name;
         $post->description = $request->description;
 
         if($post->save()){
+
+            $cat->issues()->attach($issue);
             return new CategoryResource($post);
         }
     }
