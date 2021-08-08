@@ -54,7 +54,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Category::findOrfail($id);
+        return new CategoryResource($post);
     }
 
     /**
