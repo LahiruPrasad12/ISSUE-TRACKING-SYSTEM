@@ -14,10 +14,11 @@ class Subcategories extends Model
 
     public function category(): string
     {
-        return $this.$this->belongsTo(Category::class);
+        return $this.$this->belongsTo(Category::class,'');
     }
 
-    public function issues(){
-        return $this->belongsToMany(Issues::class);
+    public function issues(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Issues::class,'issue__subcategories','cat_id','issue_id');
     }
 }

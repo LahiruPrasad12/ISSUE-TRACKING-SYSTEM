@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubCategoryRequest;
 use App\Http\Resources\SubCategoryResource;
 use App\Models\Category;
+use App\Models\Issues;
 use App\Models\Subcategories;
 use Illuminate\Http\Request;
 
@@ -37,14 +38,20 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SubCategoryRequest $request, $id)
+    public function store(Request $request, $id1)
     {
-        $post = Category::find($id);
+        $post = Category::find($id1);
+        $issue = Issues::first();
+        $sub = Subcategories::first();
         $comment = new Subcategories();
         $comment->name = $request->name;
         $comment->description = $request->description;
 
         if($post->subCategory()->save($comment)){
+//            $roleids = [$issue,$sub];
+//            $comment->issues()->attach($roleids);
+
+            $sub->issues()->attach($issue);
             return "Sub Category Add Successfully";
         }
     }
