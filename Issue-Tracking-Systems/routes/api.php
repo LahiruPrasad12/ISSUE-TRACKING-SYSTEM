@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+
+use \App\Http\Controllers\ImageController;
 use \App\Http\Controllers\CommentController;
 use \App\Http\Controllers\IssueController;
 /*
@@ -33,6 +35,8 @@ Route::post('/issue',[IssueController::class,'store']);
 //this route used to add data to the Comment table
 Route::post('/comment/{id}',[CommentController::class,'store']);
 
+//this route used to add data to the Image table
+Route::post('/image/{id1}/{id2}',[ImageController::class,'store']);
 
 
 

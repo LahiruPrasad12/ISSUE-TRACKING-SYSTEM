@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
+use App\Models\Images;
+use App\Models\Issues;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
@@ -13,7 +16,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -23,7 +26,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -32,9 +35,21 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id1, $id2)
     {
-        //
+        $post1 = Comments::find($id1);
+        $post2 = Issues::find($id2);
+        $comment = new Images();
+        $comment->imagable_type = $request->imagable_type;
+        $comment->imagable_id = $request->imagable_id;
+        $comment->size = $request->size;
+        $comment->path = $request->path;
+        $comment->name = $request->name;
+        $comment->extension = $request->extension;
+
+        if($post1->images()->$post2->image()->save($comment)){
+            return "Image Add Successfully";
+        }
     }
 
     /**
@@ -45,7 +60,8 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Images::findOrfail($id);
+        return new CommentResource($post);
     }
 
     /**
@@ -68,7 +84,12 @@ class ImageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Images::findOrFail($id);
+        $post->body = $request->body;
+
+        if($post->save()){
+            return new CommentResource($post);
+        }
     }
 
     /**
