@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class CategoryObserver
 {
@@ -15,6 +16,7 @@ class CategoryObserver
     public function created(Category $category)
     {
         echo 'Category added';
+        Log::info('Category added'.$category);
     }
 
     /**
@@ -25,7 +27,7 @@ class CategoryObserver
      */
     public function updated(Category $category)
     {
-        //
+        echo 'Category updated';
     }
 
     /**
@@ -36,7 +38,7 @@ class CategoryObserver
      */
     public function deleted(Category $category)
     {
-        //
+        echo 'Category deleted';
     }
 
     /**
@@ -47,7 +49,7 @@ class CategoryObserver
      */
     public function restored(Category $category)
     {
-        //
+        echo 'Category restored';
     }
 
     /**
@@ -58,6 +60,6 @@ class CategoryObserver
      */
     public function forceDeleted(Category $category)
     {
-        //
+        echo 'Category forceDeleted';
     }
 }
