@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IssueRequest;
 use App\Http\Resources\IssueResource;
+use App\Models\Category;
 use App\Models\Issues;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,7 @@ class IssueController extends Controller
      */
     public function store(IssueRequest $request)
     {
+        $cat = Category::find(1);
         $post = new Issues();
         $post->title = $request->title;
         $post->body = $request->body;

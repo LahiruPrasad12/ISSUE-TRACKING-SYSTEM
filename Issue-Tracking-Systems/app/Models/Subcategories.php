@@ -29,5 +29,6 @@ class Subcategories extends Model
     public function issues(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Issues::class,'issue__subcategories','cat_id','issue_id');
+
     }
 }

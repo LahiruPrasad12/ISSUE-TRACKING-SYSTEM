@@ -38,33 +38,20 @@ class ImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ImageRequest $request, $id)
+    public function store(ImageRequest $request)
     {
 
-          $post = Comments::find($id);
-          $comment = new Images();
-          $comment->imagable_type = $request->imagable_type;
-          $comment->imagable_id = $request->imagable_id;
-          $comment->size = $request->size;
-          $comment->path = $request->path;
-          $comment->name = $request->name;
-          $comment->extension = $request->extension;
-          $comment->issue_id = 2;
-          $comment->comment_id = $id;
+        $post = Issues::first();
 
+        $comment = new Images();
+        $comment->size = $request->size;
+        $comment->path = $request->path;
+        $comment->name = $request->name;
+        $comment->extension = $request->extension;
 
         if($post->images()->save($comment)){
             return new ImageResource($comment);
         }
-
-
-
-
-
-
-
-
-
 
     }
 
@@ -98,11 +85,9 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ImageRequest $request,$id)
+    public function update(ImageRequest $request,$id1)
     {
-        $comment = Images::findOrFail($id);
-        $comment->imagable_type = $request->imagable_type;
-        $comment->imagable_id = $request->imagable_id;
+        $comment = Images::findOrFail($id1);
         $comment->size = $request->size;
         $comment->path = $request->path;
         $comment->name = $request->name;

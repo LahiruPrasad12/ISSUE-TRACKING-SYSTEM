@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Comments extends Model
 {
@@ -22,10 +23,15 @@ class Comments extends Model
         return $this.$this->belongsTo(Issues::class);
     }
 
-    //This method used to make one to many relationship with comment and  images model
-    public function images(){
-        return $this->hasMany(Images::class,'comment_id');
-    }
+//    //This method used to make one to many relationship with comment and  images model
+//    public function images(){
+////        return $this->hasMany(Images::class,'comment_id');
+//        return $this->morphMany(Images::class,'imageable');
+//    }
+
+        public function images():MorphMany{
+            return $this->morphMany(Images::class,'imageable');
+        }
 
 
 

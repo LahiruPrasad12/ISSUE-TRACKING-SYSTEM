@@ -28,11 +28,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Create All API resource routes here
 Route::apiResources([
-    '/issue'=> IssueController::class,
-    '/comment'=> CommentController::class,
-    '/image' => ImageController::class,
-    '/category' => CategoryController::class,
-    '/subcategory' => SubCategoryController::class
+    'issue'=> IssueController::class,
+    'comment'=> CommentController::class,
+    'image' => ImageController::class,
+    'category' => CategoryController::class,
+    'subcategory' => SubCategoryController::class
 ]);
 
 

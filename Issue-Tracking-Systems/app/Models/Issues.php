@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Issues extends Model
 {
@@ -24,21 +25,26 @@ class Issues extends Model
     }
 
 
+
+
     //This method used to make one to many relationship with issue and  images model
-    public function images(){
-        return $this->hasMany(Images::class,'issue_id');
+    public function images():MorphMany{
+        return $this->morphMany(Images::class,'imageable');
     }
 
 
     //This method used to make many to many relationship with category and  issues model
     public function category(){
         return $this->belongsToMany(Category::class);
+
     }
 
     //This method used to make many to many relationship with sub category and  issues model
     public function Subcategory(){
         return $this->belongsToMany(Subcategories::class);
     }
+
+
 
 
 

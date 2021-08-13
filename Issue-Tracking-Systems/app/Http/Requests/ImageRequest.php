@@ -24,8 +24,6 @@ class ImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'imagable_type' => 'required',
-            'imagable_id' => 'required',
             'size' => 'required',
             'path' => 'required',
             'name' => 'required',

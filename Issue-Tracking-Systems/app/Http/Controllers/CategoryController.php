@@ -46,9 +46,13 @@ class CategoryController extends Controller
 
         if($post->save()){
 
-            $cat->issues()->attach($issue);
+            $cat->issues()->attach($cat);
             return new CategoryResource($post);
         }
+
+
+
+
     }
 
     /**

@@ -38,9 +38,9 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SubCategoryRequest $request, $id1)
+    public function store(SubCategoryRequest $request)
     {
-        $post = Category::find($id1);
+        $post = Category::first();
         $issue = Issues::first();
         $sub = Subcategories::first();
         $comment = new Subcategories();
