@@ -18,7 +18,7 @@ class CreateIssuesTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->integer('uuid');
-            $table->string('slug');
+            $table->string('slug',100);
 
         });
     }
