@@ -8,6 +8,8 @@ import Subcaregories from "./components/Categories/Subcaregories";
 
 
 
+
+
 Vue.use(VueRouter);
 
 
@@ -17,6 +19,7 @@ const router = new VueRouter({
 
   routes:[
     {path:"/" ,component:Allcategories},
+    {path:"/allCat" ,component:Allcategories},
     {path:"/subcategory/:id" ,component:Subcaregories},
     {path:"/add" ,component:Allissues},
     {path:"/contact" ,component:ContactUs},
