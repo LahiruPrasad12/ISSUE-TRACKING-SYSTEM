@@ -15,12 +15,14 @@
             <form>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Name:</label>
-                <input type="text" class="form-control" id="recipient-name" v-model = "oneSubCategory.Name">
+                <input type="text" class="form-control" id="recipient-name" v-model = "oneSubCategory.Name" />
+
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Description:</label>
                 <textarea class="form-control" id="message-text" v-model="oneSubCategory.description">{{oneSubCategory.description}}</textarea>
               </div>
+              <div class="warning" v-show="this.errMsg">{{this.errMessage}}</div>
             </form>
           </div>
           <div class="modal-footer">
@@ -96,10 +98,19 @@ export default {
     return{
       Subcategory:[],
       oneSubCategory:[],
+      selectedSubCategory : 0,
+
+
+      //These variable used to occur error msg when user try to submit null value
+      errMessage : null,
+      errMsg : false,
+
+      //This variable used to inform user by his action showing
       message : null,
       state : false,
-      catName : null,
-      selectedSubCategory : 0,
+
+
+
     }
   },
 
@@ -120,6 +131,9 @@ export default {
 
       })
     },
+
+
+
 
 
     //This method used to delete some sub categories
@@ -144,18 +158,73 @@ export default {
     },
 
 
+
+
+
+
+
     //This method used to update data
     updateData(event){
-      this.$http.put("http://127.0.0.1:8000/api/subcategory/"+this.selectedSubCategory,this.oneSubCategory).then(function (respond){
-        this.message="successfully updated  "+ '"'+ this.oneSubCategory.Name+'"' + " category";
+      if(this.oneSubCategory.Name.length == 0){
+        this.errMessage = "name is required";
+        this.errMsg=true;
 
-        this.$router.go();
-      })
+
+      }else if(this.oneSubCategory.description.length == 0){
+        this.errMessage = "description is required";
+        this.errMsg=true;
+
+
+      }else {
+        this.$http.put("http://127.0.0.1:8000/api/subcategory/"+this.selectedSubCategory,this.oneSubCategory).then(function (respond){
+          this.message="successfully updated  "+ '"'+ this.oneSubCategory.Name+'"' + " category";
+          this.$router.go();
+        })
+
+      }
+
     }
   }
 }
 </script>
 
 <style scoped>
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+.info, .success, .warning, .error, .validation {
+  border: 1px solid;
+  margin: 10px 0px;
+  padding: 15px 10px 15px 50px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+}
+.info {
+  color: #00529B;
+  background-color: #BDE5F8;
+  background-image: url('https://i.imgur.com/ilgqWuX.png');
+}
+.success {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+  background-image: url('https://i.imgur.com/Q9BGTuy.png');
+}
+.warning {
+  color: #9F6000;
+  background-color: #FEEFB3;
+  background-image: url('https://i.imgur.com/Z8q7ww7.png');
+}
+.error{
+  color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
+}
+.validation{
+  color: #D63301;
+  background-color: #FFCCBA;
+  background-image: url('https://i.imgur.com/GnyDvKN.png');
+}
 
 </style>

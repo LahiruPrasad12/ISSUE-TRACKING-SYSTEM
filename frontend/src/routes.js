@@ -19,7 +19,8 @@ const router = new VueRouter({
 
   routes:[
     {path:"/" ,component:Allcategories},
-    {path:"/allCat" ,component:Allcategories},
+    {path:"/category" ,component:Allcategories},
+    {path:"/issue" ,component:Allissues},
     {path:"/subcategory/:id" ,component:Subcaregories},
     {path:"/add" ,component:Allissues},
     {path:"/contact" ,component:ContactUs},
