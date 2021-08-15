@@ -38,7 +38,11 @@ Route::apiResources([
 //This route is used to get sub categories using category id
 Route::get('/Subcategory/render/{id}',[SubCategoryController::class,'getsubCategoryUsingCategoryID']);
 
+//This route used to get all comment which under one specific Issue
+Route::get('comments/issue/{id}',[CommentController::class,'getCommentUsingPostId']);
 
+//This route for add  new comment
+Route::post('/comment/{id}', [CommentController::class,'store']);
 
 ///*-----------------------------------------Add Data-----------------------------------------*/
 //

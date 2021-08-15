@@ -17,7 +17,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $post = Comments::paginate(10);
+        $post = Comments::all();
         return CommentResource::collection($post);
     }
 
@@ -41,7 +41,7 @@ class CommentController extends Controller
     {
         $post = Issues::find($id);
         $comment = new Comments();
-        $comment->body = $request->body;
+        $comment->body = $request->Body;
 
         if($post->comments()->save($comment)){
             return new CommentResource($comment);
@@ -81,7 +81,7 @@ class CommentController extends Controller
     public function update(CommentRequest $request, $id)
     {
         $post = Comments::findOrFail($id);
-        $post->body = $request->body;
+        $post->body = $request->Body;
 
         if($post->save()){
             return new CommentResource($post);
