@@ -22,10 +22,6 @@
                 {{this.successMessage}}
               </div>
 
-              <div class="alert alert-danger" role="alert" v-show="this.primardeleteState">
-                {{this.successMessage}}
-              </div>
-
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Name:</label>
                 <input type="text" class="form-control" id="recipient-name" v-model = "oneIssue.Title" />
@@ -39,7 +35,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="deleteInfo($event)" v-bind:id="oneIssue.id" v-bind:Title = "oneIssue.Title" >Delete</button>
             <button type="button" class="btn btn-primary"  @click="updateInfo($event)" v-bind:name="oneIssue.Title">Update</button>
           </div>
         </div>
@@ -63,6 +59,11 @@
             <div class="alert alert-primary" role="alert" v-show="this.primaryState">
               {{this.successMessage}}
             </div>
+
+            <div class="alert alert-danger" role="alert" v-show="this.primardeleteState">
+              {{this.successMessage}}
+            </div>
+
             <!--            <button class="btn btn-info" id="list">-->
             <!--              List View-->
             <!--            </button>-->
@@ -95,7 +96,7 @@
                 <button class="btn btn-danger" id="grid" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"  @click="editeIssue($event)" v-bind:id="issues.id" v-bind:name="issues.Title">
                   Edit
                 </button>&emsp;&emsp;&emsp;&emsp;&emsp;
-                <button class="btn bg-info" id="list" >
+                <button class="btn bg-info" id="list" @click="viewComment($event)" v-bind:id="issues.id">
                   View Comments
                 </button>
               </div>
@@ -135,42 +136,112 @@ export default {
     },
 
     created() {
+
+    try{
       this.$http.get("http://127.0.0.1:8000/api/issue").then(function (respond){
         console.log(respond.body.data);
         this.issues = respond.body.data;
-        this.successMessage="Fetched all issues ";
-        this.primaryState=true;
+
+        if(respond.body.data.length == 0){
+          this.successMessage="No more issues ";
+          this.primardeleteState=true;
+        }else {
+          this.successMessage="Fetched all issues ";
+          this.primardeleteState=false;
+          this.primaryState=true;
+        }
+
       })
+    }catch (e) {
+      console.log(e)
+    }
+
     },
 
     methods:{
 
+
+
     //This method used to get one issue data to edit
       editeIssue(event){
-        this.selectIssue = event.target.id;
 
-        this.$http.get("http://127.0.0.1:8000/api/issue/"+this.selectIssue).then(function (respond){
-          console.log(respond.body.data);
-          this.oneIssue = respond.body.data;
-        })
+        try{
+          this.selectIssue = event.target.id;
+
+          this.$http.get("http://127.0.0.1:8000/api/issue/"+this.selectIssue).then(function (respond){
+            console.log(respond.body.data);
+            this.oneIssue = respond.body.data;
+          })
+        }catch (err){
+          console.log(err)
+        }
+
       },
 
+
+
+      //This function used to update issue data
       updateInfo(event){
-        if(this.oneIssue.Title.length == 0){
-          this.errMessage = "Title is required"
-          this.valdateState = true;
 
-        }else if(this.oneIssue.Body.length == 0) {
-          this.errMessage = "Body is required";
-          this.valdateState = true;
+        try{
+          if(this.oneIssue.Title.length == 0){
+            this.errMessage = "Title is required"
+            this.valdateState = true;
 
-        }else{
-          this.$http.put("http://127.0.0.1:8000/api/issue/"+this.selectIssue,this.oneIssue).then(function (respond){
-            this.successMessage="successfully updated  "+ '"'+ this.oneIssue.Title+'"' + " Issue";
-            this.primarUpdateState = true;
+          }else if(this.oneIssue.Body.length == 0) {
+            this.errMessage = "Body is required";
+            this.valdateState = true;
 
-          })
+          }else{
+            this.$http.put("http://127.0.0.1:8000/api/issue/"+this.selectIssue,this.oneIssue).then(function (respond){
+              this.successMessage="successfully updated  "+ '"'+ this.oneIssue.Title+'"' + " Issue";
+              this.primarUpdateState = true;
+              this.valdateState = false;
+              this.primaryState = false;
+
+            })
+          }
+        }catch (err){
+          console.log(err)
         }
+
+      },
+
+
+
+      //This method used to delete issues
+      deleteInfo(event){
+
+        try{
+
+          const x = confirm("Are you sure");
+
+          if(x==true){
+            this.$http.delete("http://127.0.0.1:8000/api/issue/"+event.target.id).then(function (respond){
+              var postion = this.issues.findIndex(function (element){
+                return element.id == event.target.id;
+              })
+              this.issues.splice(postion,1);
+              this.primardeleteState = true;
+              this.primaryState = false;
+              this.successMessage="successfully deleted "+ this.oneIssue.Title+ " category";
+
+
+            })
+          }else {
+            this.primardeleteState = true;
+            this.primaryState = false;
+            this.successMessage="canceled delete "+ '"'+ this.oneIssue.Title+'"' +" category"
+          }
+        }catch (err){
+          console.log(err)
+        }
+
+      },
+
+
+      viewComment(event){
+        this.$router.push('/comment/'+event.target.id);
       }
 
     }

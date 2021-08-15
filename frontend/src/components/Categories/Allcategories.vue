@@ -76,15 +76,32 @@ export default {
   },
 
   created() {
-    this.$http.get("http://127.0.0.1:8000/api/category").then(function (respond){
-      this.category = respond.body.data
-      this.message="fetched all categories "
-      this.primarState = true;
-    })
+
+    try{
+      this.$http.get("http://127.0.0.1:8000/api/category").then(function (respond){
+        this.category = respond.body.data
+
+        if(this.category.length == 0){
+          this.message="No more categories "
+          this.state = true;
+
+        }else{
+          this.message="Fetched all categories "
+          this.primarState = true;
+        }
+      })
+
+    }catch (err){
+      console.log(err)
+    }
+
   },
 
   methods:{
     deleteCategory(event){
+
+      try{
+
         const x = confirm("Are you sure");
 
         if(x==true){
@@ -94,13 +111,20 @@ export default {
             })
             this.category.splice(postion,1);
             this.state = true;
+            this.primarState=false;
             this.message="successfully delete "+ '"'+ event.target.name+'"' + " category";
 
           })
         }else {
           this.state = true;
+          this.primarState=false;
           this.message="canceled delete "+ '"'+ event.target.name+'"' +" category"
         }
+
+      }catch (e) {
+        console.log(e)
+      }
+
     },
 
     viewSubCategory(event){

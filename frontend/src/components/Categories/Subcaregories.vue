@@ -27,7 +27,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="updateData($event)" v-bind:id="oneSubCategory.id" v-bind:name="Subcategory.name">Send message</button>
+            <button type="button" class="btn btn-danger" @click="updateData($event)" v-bind:id="oneSubCategory.id" v-bind:name="Subcategory.name">Update Data</button>
           </div>
         </div>
       </div>
@@ -117,6 +117,11 @@ export default {
   created() {
     this.$http.get("http://127.0.0.1:8000/api/Subcategory/render/"+this.$route.params.id).then(function (respond){
       this.Subcategory = respond.body;
+
+      if(this.Subcategory.length == 0){
+        this.state=true;
+        this.message = "No more sub categories"
+      }
     })
   },
 
@@ -124,12 +129,18 @@ export default {
 
     //This method used to get data for update
     editeSubCategory(event){
-      this.selectedSubCategory=event.target.id;
-      this.$http.get("http://127.0.0.1:8000/api/subcategory/"+event.target.id).then(function (respond){
-        console.log(respond)
-        this.oneSubCategory=respond.body.data;
 
-      })
+      try{
+        this.selectedSubCategory=event.target.id;
+        this.$http.get("http://127.0.0.1:8000/api/subcategory/"+event.target.id).then(function (respond){
+          console.log(respond)
+          this.oneSubCategory=respond.body.data;
+
+        })
+      }catch (e) {
+        console.log(e)
+      }
+
     },
 
 
@@ -139,22 +150,28 @@ export default {
     //This method used to delete some sub categories
     deleteSubategory(event){
 
-      const x = confirm("Are you sure");
+      try{
+        const x = confirm("Are you sure");
 
-      if(x==true){
-        this.$http.delete("http://127.0.0.1:8000/api/subcategory/"+event.target.id).then(function (respond){
-          var postion = this.Subcategory.findIndex(function (element){
-            return element.id == event.target.id;
+        if(x==true){
+          this.$http.delete("http://127.0.0.1:8000/api/subcategory/"+event.target.id).then(function (respond){
+            var postion = this.Subcategory.findIndex(function (element){
+              return element.id == event.target.id;
+            })
+            this.Subcategory.splice(postion,1);
+            this.state = true;
+            this.message="successfully deleted  "+ '"'+ event.target.name+'"' + " category";
+
           })
-          this.Subcategory.splice(postion,1);
+        }else {
           this.state = true;
-          this.message="successfully deleted  "+ '"'+ event.target.name+'"' + " category";
+          this.message="canceled delete "+ '"'+ event.target.name+'"' +" category"
+        }
 
-        })
-      }else {
-        this.state = true;
-        this.message="canceled delete "+ '"'+ event.target.name+'"' +" category"
+      }catch (e) {
+        console.log(e)
       }
+
     },
 
 
@@ -165,23 +182,30 @@ export default {
 
     //This method used to update data
     updateData(event){
-      if(this.oneSubCategory.Name.length == 0){
-        this.errMessage = "name is required";
-        this.errMsg=true;
 
 
-      }else if(this.oneSubCategory.description.length == 0){
-        this.errMessage = "description is required";
-        this.errMsg=true;
+      try{
+        if(this.oneSubCategory.Name.length == 0){
+          this.errMessage = "name is required";
+          this.errMsg=true;
 
 
-      }else {
-        this.$http.put("http://127.0.0.1:8000/api/subcategory/"+this.selectedSubCategory,this.oneSubCategory).then(function (respond){
-          this.message="successfully updated  "+ '"'+ this.oneSubCategory.Name+'"' + " category";
-          this.$router.go();
-        })
+        }else if(this.oneSubCategory.description.length == 0){
+          this.errMessage = "description is required";
+          this.errMsg=true;
 
+
+        }else {
+          this.$http.put("http://127.0.0.1:8000/api/subcategory/"+this.selectedSubCategory,this.oneSubCategory).then(function (respond){
+            this.message="successfully updated  "+ '"'+ this.oneSubCategory.Name+'"' + " category";
+            this.$router.go();
+          })
+
+        }
+      }catch (err){
+        console.log(err);
       }
+
 
     }
   }

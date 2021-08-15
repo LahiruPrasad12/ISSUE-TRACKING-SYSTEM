@@ -5,6 +5,7 @@ import AboutUs from "./components/layout/AboutUs";
 import Allcategories from "./components/Categories/Allcategories";
 import ContactUs from "./components/layout/ContactUs";
 import Subcaregories from "./components/Categories/Subcaregories";
+import Comment from "./components/Comments/Comment";
 
 
 
@@ -23,6 +24,7 @@ const router = new VueRouter({
     {path:"/issue" ,component:Allissues},
     {path:"/subcategory/:id" ,component:Subcaregories},
     {path:"/add" ,component:Allissues},
+    {path:"/comment/:id" ,component:Comment},
     {path:"/contact" ,component:ContactUs},
     {path:"/about", component:AboutUs}
 
