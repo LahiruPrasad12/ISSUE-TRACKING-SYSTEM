@@ -9,6 +9,9 @@
             <div class="alert alert-danger" role="alert" v-show="this.state">
               {{this.message}}
             </div>
+            <div class="alert alert-primary" role="alert" v-show="this.primarState">
+              {{this.message}}
+            </div>
 <!--            <button class="btn btn-info" id="list">-->
 <!--              List View-->
 <!--            </button>-->
@@ -21,8 +24,8 @@
     </div>
     <div id="products" class="row view-group">
 
-      <div class="item col-xs-4 col-lg-4 " v-for="category in category">
-        <div class="thumbnail card">
+      <div class="item col-xs-4 col-lg-4  "  v-for="category in category" >
+        <div class="thumbnail card text-dark bg-light border border-5 ">
           <div class="img-event">
           </div>
           <div class="img-event">
@@ -36,8 +39,8 @@
 <!--                <p class="lead">-->
 <!--                  $21.000</p>-->
               </div>
-              <div class="btn-group">
-                <button class="btn btn-info" id="list" @click="viewSubCategory($event)" v-bind:id="category.id" >
+              <div class="btn-group " >
+                <button class="btn bg-info" id="list" @click="viewSubCategory($event)" v-bind:id="category.id" >
                   View Subcategories
                 </button>&emsp;&emsp;&emsp;&emsp;&emsp;
                 <button class="btn btn-danger" id="grid" @click="deleteCategory($event)" v-bind:id="category.id" v-bind:name="category.name">
@@ -67,13 +70,16 @@ export default {
       category:[],
       message : null,
       state : false,
-      catName : null,
+      primarState : false,
+
     }
   },
 
   created() {
     this.$http.get("http://127.0.0.1:8000/api/category").then(function (respond){
       this.category = respond.body.data
+      this.message="fetched all categories "
+      this.primarState = true;
     })
   },
 
