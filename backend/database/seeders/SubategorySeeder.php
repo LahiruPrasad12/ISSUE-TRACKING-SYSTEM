@@ -14,6 +14,6 @@ class SubategorySeeder extends Seeder
      */
     public function run()
     {
-        Subcategories::factory()->times(10)->create();
+        Subcategories::factory()->times(50)->create();
     }
 }

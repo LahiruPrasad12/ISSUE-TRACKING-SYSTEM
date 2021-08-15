@@ -103,7 +103,7 @@ class CommentController extends Controller
     }
 
 
-    //This function return all posts of one specific Issue
+    //This function return all comments of one specific Issue
     public function getCommentUsingPostId($id){
         $comment = Issues::find($id)->comments;
         return $comment;

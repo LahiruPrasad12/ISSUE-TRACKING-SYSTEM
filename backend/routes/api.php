@@ -35,6 +35,10 @@ Route::apiResources([
     'subcategory' => SubCategoryController::class
 ]);
 
+//This route is used to get sub categories using category id
+Route::get('/Subcategory/render/{id}',[SubCategoryController::class,'getsubCategoryUsingCategoryID']);
+
+
 
 ///*-----------------------------------------Add Data-----------------------------------------*/
 //

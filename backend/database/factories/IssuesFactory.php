@@ -22,11 +22,11 @@ class IssuesFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->text(15);
+        $title = $this->faker->text(30);
         return [
             'title'=>$title,
-            'body'=>$this->faker->text(50),
-            'uuid' => rand(1,10),
+            'body'=>$this->faker->text(100),
+            'uuid' => rand(1,50),
             'slug'=>Str::slug($title)
         ];
     }

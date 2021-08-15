@@ -24,7 +24,7 @@ class SubCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
+            'Name' => 'required',
             'description' => 'required'
         ];
     }

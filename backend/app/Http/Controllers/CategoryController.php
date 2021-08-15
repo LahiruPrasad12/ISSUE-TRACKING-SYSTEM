@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $post = Category::paginate(10);
+        $post = Category::all();
         return CategoryResource::collection($post);
     }
 
@@ -66,6 +66,7 @@ class CategoryController extends Controller
         $post = Category::findOrfail($id);
         return new CategoryResource($post);
     }
+
 
     /**
      * Show the form for editing the specified resource.

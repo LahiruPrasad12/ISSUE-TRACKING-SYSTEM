@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Issues;
 use App\Models\Subcategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubCategoryController extends Controller
 {
@@ -66,6 +67,11 @@ class SubCategoryController extends Controller
         return new SubCategoryResource($post);
     }
 
+//    public function render($id)
+//    {
+//        $users = DB::table('subcategories')->where('cat_ID',$id)->get();
+//        return $users;
+//    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -87,7 +93,7 @@ class SubCategoryController extends Controller
     public function update(SubCategoryRequest $request, $id)
     {
         $comment = Subcategories::findOrFail($id);
-        $comment->name = $request->name;
+        $comment->name = $request->Name;
         $comment->description = $request->description;
 
         if($comment->save()){
@@ -115,4 +121,9 @@ class SubCategoryController extends Controller
         $comment = Category::find($id)->subCategory;
         return $comment;
     }
+
+    //This method used to get count of sub categories of specific categories
+//    public function getIssues($id){
+//        DB::table('')
+//    }
 }

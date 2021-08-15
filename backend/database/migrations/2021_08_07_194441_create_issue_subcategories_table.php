@@ -16,10 +16,10 @@ class CreateIssueSubcategoriesTable extends Migration
         Schema::create('issue__subcategories', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('cat_id')->unsigned();
+            $table->bigInteger('subcat_id')->unsigned();
             $table->bigInteger('issue_id')->unsigned();
 
-            $table->foreign('cat_id')->references('id')->on('subcategories')->onDelete('cascade');
+            $table->foreign('subcat_id')->references('id')->on('subcategories')->onDelete('cascade');
             $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
         });
     }

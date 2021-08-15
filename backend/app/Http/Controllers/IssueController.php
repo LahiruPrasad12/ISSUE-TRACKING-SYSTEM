@@ -17,7 +17,7 @@ class IssueController extends Controller
      */
     public function index()
     {
-        $post = Issues::paginate(10);
+        $post = Issues::all();
         return IssueResource::collection($post);
     }
 
@@ -44,7 +44,7 @@ class IssueController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->uuid = $request->uuid;
-        $post->slug = $request->slug;
+        $post->slug = Str::slug($request->title);
 
 
         if($post->save()){
@@ -85,10 +85,10 @@ class IssueController extends Controller
     public function update(IssueRequest $request, $id)
     {
         $post = Issues::findOrFail($id);
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->uuid = $request->uuid;
-        $post->slug = $request->slug;;
+        $post->title = $request->Title;
+        $post->body = $request->Body;
+        $post->uuid = $request->UUID;
+        $post->slug = $request->SLUG;;
 
         if($post->save()){
             return new IssueResource($post);

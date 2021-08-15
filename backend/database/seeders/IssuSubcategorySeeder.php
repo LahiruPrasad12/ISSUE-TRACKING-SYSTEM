@@ -14,6 +14,6 @@ class IssuSubcategorySeeder extends Seeder
      */
     public function run()
     {
-        Issue_Subcategories::factory()->times(10)->create();
+        Issue_Subcategories::factory()->times(50)->create();
     }
 }

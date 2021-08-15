@@ -24,10 +24,10 @@ class IssueRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required',
-            'body' => 'required',
-            'uuid' => 'required',
-            'slug' => 'required'
+            'Title' => 'required',
+            'Body' => 'required',
+            'UUID' => 'required',
+            'SLUG' => 'required'
         ];
     }
 }

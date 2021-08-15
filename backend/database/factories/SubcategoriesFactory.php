@@ -22,9 +22,9 @@ class SubcategoriesFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->text(15),
-            'description'=>$this->faker->text(50),
-            'cat_ID' => rand(1,10),
+            'name'=>$this->faker->text(30),
+            'description'=>$this->faker->text(100),
+            'cat_ID' => rand(1,50),
         ];
     }
 }

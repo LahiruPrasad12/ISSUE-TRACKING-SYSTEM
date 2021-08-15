@@ -22,8 +22,8 @@ class Issue_CategoriesFactory extends Factory
     public function definition()
     {
         return [
-            'cat_id' => rand(1,10),
-            'issue_id' => rand(1,10)
+            'cat_id' => rand(1,50),
+            'issue_id' => rand(1,50)
         ];
     }
 }
