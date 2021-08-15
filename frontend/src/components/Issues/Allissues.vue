@@ -76,8 +76,9 @@
     </div>
     <div id="products" class="row view-group">
 
-      <div class="item col-xs-4 col-lg-4  "  v-for="issues in issues" >
-        <div class="thumbnail card text-dark bg-light border border-5 ">
+      <div class="item col-xs-4 col-lg-4  "  v-for="issues in issues" style="margin-bottom: 20px; box-shadow: #1a202c">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+        <div class="thumbnail card text-dark bg-light border">
           <div class="img-event">
           </div>
           <div class="img-event">
@@ -93,16 +94,17 @@
               </div>
               <div class="btn-group " >
 
-                <button class="btn btn-danger" id="grid" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"  @click="editeIssue($event)" v-bind:id="issues.id" v-bind:name="issues.Title">
+                <button class="btn btn-danger" id="grid" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"  @click="editeIssue($event)" v-bind:id="issues.id" v-bind:name="issues.Title" style="font-size: medium; border-radius: 0px">
                   Edit
                 </button>&emsp;&emsp;&emsp;&emsp;&emsp;
-                <button class="btn bg-info" id="list" @click="viewComment($event)" v-bind:id="issues.id">
+                <button class="btn bg-info" id="list" @click="viewComment($event)" v-bind:id="issues.id"  style="font-size: medium; border-radius: 0px">
                   View Comments
                 </button>
               </div>
 
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

@@ -48,10 +48,9 @@
           <div class="modal-body">
             <form>
 
-              <div class="alert alert-danger" role="alert" v-show="this.upDateState">
+              <div class="alert alert-success" role="alert" v-show="this.upDateState">
                 {{this.message}}
               </div>
-
               <div class="mb-3">
 
 

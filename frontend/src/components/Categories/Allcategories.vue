@@ -24,14 +24,16 @@
     </div>
     <div id="products" class="row view-group">
 
-      <div class="item col-xs-4 col-lg-4  "  v-for="category in category" >
-        <div class="thumbnail card text-dark bg-light border border-5 ">
+
+      <div class="item col-xs-4 col-lg-4  "  v-for="category in category" style="margin-bottom: 20px; box-shadow: #1a202c">
+        <div class="shadow p-3 mb-5 bg-white rounded">
+        <div class="thumbnail card text-dark bg-light ">
           <div class="img-event">
           </div>
           <div class="img-event">
-            <h3 class="group card-title inner list-group-item-heading">
+            <h3 class="group card-title inner list-group-item-heading" style=" margin-left: 15px; margin-top: 10px  ">
               {{category.name}}</h3>
-          </div>
+          </div><hr/>
           <div class="caption card-body">
             <p class="group inner list-group-item-text"> {{category.description}} </p>
             <div class="row">
@@ -40,17 +42,19 @@
 <!--                  $21.000</p>-->
               </div>
               <div class="btn-group " >
-                <button class="btn bg-info" id="list" @click="viewSubCategory($event)" v-bind:id="category.id" >
-                  View Subcategories
-                </button>&emsp;&emsp;&emsp;&emsp;&emsp;
-                <button class="btn btn-danger" id="grid" @click="deleteCategory($event)" v-bind:id="category.id" v-bind:name="category.name">
+                <button class="btn btn-danger" id="grid" @click="deleteCategory($event)" v-bind:id="category.id" v-bind:name="category.name" style="font-size: medium; border-radius: 0px">
                   Delete
+                </button>&emsp;&emsp;&emsp;
+                <button class="btn bg-info" id="list" @click="viewSubCategory($event)" v-bind:id="category.id" style="font-size: medium; border-radius: 0px " >
+                  View Subcategory
                 </button>
-              </div>
 
+              </div>
+            </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
