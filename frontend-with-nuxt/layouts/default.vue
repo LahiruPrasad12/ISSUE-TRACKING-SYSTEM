@@ -15,7 +15,7 @@
         </b-navbar-item>
 
         <b-navbar-item>
-          <nuxt-link to="/allissues">All Issues</nuxt-link>
+          <nuxt-link to="/issues/allisuue">All Issues</nuxt-link>
         </b-navbar-item>
 
         <b-navbar-dropdown label="Info">
