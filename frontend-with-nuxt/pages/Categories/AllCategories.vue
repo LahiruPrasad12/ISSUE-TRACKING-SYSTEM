@@ -5,25 +5,25 @@
 
   <!--This part used to diaplay pop up box to edite some details-->
       <!---This part used display pop up box -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="exampleModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <h5 id="exampleModalLabel" class="modal-title"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Name:</label>
-                <input type="text" class="form-control" id="recipient-name" />
+                <input id="recipient-name" type="text" class="form-control" />
 
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Description:</label>
-                <textarea class="form-control" id="message-text"></textarea>
+                <textarea id="message-text" class="form-control"></textarea>
               </div>
-             
+
             </form>
           </div>
           <div class="modal-footer">
@@ -46,12 +46,12 @@
         <div class="pull-right">
           <p class="title is-1">All Categories</p>
           <hr/>
-          <div class="btn-group" id="err msg">
-            <div class="alert alert-danger" role="alert" v-show="this.state">
-              {{this.message}}
+          <div id="err msg" class="btn-group">
+            <div v-show="state" class="alert alert-danger" role="alert">
+              {{message}}
             </div>
-            <div class="alert alert-primary" role="alert" v-show="this.primarState">
-              {{this.message}}
+            <div v-show="primarState" class="alert alert-primary" role="alert">
+              {{message}}
             </div>
 <!--            <button class="btn btn-info" id="list">-->
 <!--              List View-->
@@ -68,8 +68,8 @@
 
 
 
-      <div class="item col-xs-4 col-lg-4  "  v-for="categories in categories" v-bind:key="categories.id" style="margin-bottom: 20px; box-shadow: #1a202c" >
-        
+      <div v-for="categories in categories"  :key="categories.id" class="item col-xs-4 col-lg-4  " style="margin-bottom: 20px; box-shadow: #1a202c" >
+
     <div class="card" style="width:400px">
   <header class="card-header" style="text-align: center">
     <p class="subtitle is-4">
@@ -89,13 +89,13 @@
     </div>
   </div>
   <footer class="card-footer">
-    <button class="card-footer-item" style="color:black; border: none; background:white" @click="viewSubCategory($event)" v-bind:id="categories.id">View</button>
+    <button :id="categories.id" class="card-footer-item" style="color:black; border: none; background:white" @click="viewSubCategory($event)">View</button>
     <button class="card-footer-item"  style=" border: none; background:white" >Edit</button>
-    <button class="card-footer-item" style="color:red;border: none; background:white "  @click="confirmCustomDelete" v-bind:id="categories.id">Delete</button>
+    <button :id="categories.id" class="card-footer-item"  style="color:red;border: none; background:white " @click="confirmCustomDelete(categories.id)">Delete</button>
   </footer>
 </div>
-         
-     
+
+
 
       </div>
     </div>
@@ -126,7 +126,7 @@ export default {
   async mounted() {
    this.mountains = await this.fetchAllCategories();
    this.categories = this.mountains.data.data;
-  
+
   },
 
   methods:{
@@ -140,7 +140,7 @@ export default {
     },
 
 
-     confirmCustomDelete(event) {
+     confirmCustomDelete(categoryID) {
 
        try{
         this.$buefy.dialog.confirm({
@@ -150,17 +150,16 @@ export default {
           type: 'is-danger',
           hasIcon: true,
            onConfirm:async ()=>{
-            await this.$axios.delete('/category/'+event.target.id).then(async(res)=>{
-             const postion = await this.categories.findIndex(async function (element){
-               return element.id === await event.target.id;
-            })
+            await this.$axios.delete('/category/'+categoryID).then(async(res)=>{
+
+             const postion = await this.categories.findIndex(x => x.id === categoryID)
 
             this.categories.splice(postion,1);
             this.$buefy.toast.open('Account deleted!')
            })
           }
 
-         
+
         })
        }catch{
          this.$buefy.toast.open('Something went wrong!')
@@ -169,7 +168,7 @@ export default {
     },
 
 
-   
+
      viewSubCategory(event){
       this.$router.push('/categories/'+event.target.id);
     }

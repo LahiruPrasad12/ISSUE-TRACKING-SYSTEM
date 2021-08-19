@@ -8,12 +8,12 @@
         <div class="pull-right">
           <p class="title is-1">Sub Categories</p>
           <hr/>
-          <div class="btn-group" id="err msg">
-            <div class="alert alert-danger" role="alert" v-show="this.state">
-              {{this.message}}
+          <div id="err msg" class="btn-group">
+            <div v-show="state" class="alert alert-danger" role="alert">
+              {{message}}
             </div>
-            <div class="alert alert-primary" role="alert" v-show="this.primarState">
-              {{this.message}}
+            <div v-show="primarState" class="alert alert-primary" role="alert">
+              {{message}}
             </div>
 <!--            <button class="btn btn-info" id="list">-->
 <!--              List View-->
@@ -30,7 +30,7 @@
 
 
 
-      <div class="item col-xs-4 col-lg-4  "  v-for="subcat in subcat" v-bind:key="subcat.id" style="margin-bottom: 20px; box-shadow: #1a202c" >
+      <div v-for="subcat in subcat"  :key="subcat.id" class="item col-xs-4 col-lg-4  " style="margin-bottom: 20px; box-shadow: #1a202c" >
 
     <div class="card" style="width:400px">
   <header class="card-header" style="text-align: center">
@@ -51,9 +51,9 @@
     </div>
   </div>
   <footer class="card-footer">
-    <button class="card-footer-item" style="color:black; border: none; background:white" v-bind:id="subcat.id">View</button>
+    <button :id="subcat.id" class="card-footer-item" style="color:black; border: none; background:white">View</button>
     <button class="card-footer-item"  style=" border: none; background:white" >Edit</button>
-    <button class="card-footer-item" style="color:red;border: none; background:white "  v-bind:id="subcat.id">Delete</button>
+    <button class="card-footer-item" style="color:red;border: none; background:white "  @click="confirmCustomDelete(subcat.id)">Delete</button>
   </footer>
 </div>
 
@@ -94,14 +94,59 @@ export default {
     async fetch(){
 
       this.allSubCat = await this.fetchAllSubCategories();
-      this.subcat = this.allSubCat.data
+
+      if(this.allSubCat.data.length !== 0){
+        this.subcat = this.allSubCat.data
+      }else{
+        this.alertCustom();
+      }
+
 
     },
 
     methods:{
+
           async fetchAllSubCategories(){
-         return await this.$axios.get('Subcategory/render/'+this.$route.params.subcategory);
-      }
+              return await this.$axios.get('Subcategory/render/'+this.$route.params.subcategory);
+          },
+
+          alertCustom() {
+            this.$buefy.dialog.alert({
+                title: 'Title Alert',
+                message: '<b>There have no more sub categories </b>, for this main category!',
+                confirmText: 'Cool!'
+                })
+            },
+
+
+
+          confirmCustomDelete(categoryID) {
+
+                try{
+                  this.$buefy.dialog.confirm({
+                    title: 'Deleting account',
+                    message: 'Are you sure you want to <b>delete</b> this category? This action cannot be undone.',
+                    confirmText: 'Delete Account',
+                    type: 'is-danger',
+                    hasIcon: true,
+                    onConfirm:async ()=>{
+                      await this.$axios.delete('/subcategory/'+categoryID).then(async(res)=>{
+
+                      const postion = await this.subcat.findIndex(x => x.id === categoryID)
+
+                      this.subcat.splice(postion,1);
+                      this.$buefy.toast.open('Account deleted!')
+                      this.$router.go();
+                    })
+                    }
+
+
+                  })
+                }catch{
+                  this.$buefy.toast.open('Something went wrong!')
+                }
+
+           },
     }
 }
 </script>
