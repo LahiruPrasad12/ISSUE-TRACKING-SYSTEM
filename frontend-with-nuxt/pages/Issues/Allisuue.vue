@@ -7,7 +7,7 @@
         <div class="row">
       <div class="col-lg-12 my-3">
         <div class="pull-right">
-          <p class="title is-1"> Edite category details</p>
+          <p class="title is-1" style="text-align : center"> Edite issue details</p>
 
           <hr/>
         </div>
@@ -16,20 +16,20 @@
 
 
 
-    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:500px; padding-left:30px">
+    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:570px; padding-left:30px">
 
       <div style="width:300px; margin-left:30px">
 
 
         <b-field label="Name">
-            <b-input v-model="editecat.name"
+            <b-input v-model="editecat.Title"
                 type="text"
                 value="john@" maxlength="30">
             </b-input>
         </b-field>
 
         <b-field label="Message">
-            <b-input v-model="editecat.description" maxlength="200" type="textarea"></b-input>
+            <b-input v-model="editecat.Body" maxlength="200" type="textarea"></b-input>
         </b-field>
 
 
@@ -88,13 +88,13 @@
   <div class="card-content">
     <div class="content">
       {{issue.Body}}
-      <br>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      <br> <br>
+      <time class="float-left" datetime="2016-1-1"> {{issue.SLUG}} </time> <b><time class="float-right" datetime="2016-1-1"> User ID :{{issue.UUID}} </time></b>
     </div>
   </div>
   <footer class="card-footer">
-    <button class="card-footer-item" style="color:black; border: none; background:white" @click="viewSubCategory()">View</button>
-    <button class="card-footer-item"  style=" border: none; background:white" @click="editeteSubCat()">Edit</button>
+    <button class="card-footer-item" style="color:black; border: none; background:white" @click="viewComment(issue.id)">View</button>
+    <button class="card-footer-item"  style=" border: none; background:white" @click="editeIssue(issue.id)">Edit</button>
     <button class="card-footer-item"  style="color:red;border: none; background:white " @click="confirmCustomDelete(issue.id)">Delete</button>
   </footer>
 </div>
@@ -155,8 +155,10 @@ export default {
       },
 
 
+
+
         confirmCustomDelete(issueID) {
-            alert(issueID)
+
             try{
               this.$buefy.dialog.confirm({
                 title: 'Deleting account',
@@ -181,6 +183,71 @@ export default {
             }
 
     },
+
+
+      editeIssue(issueID){
+
+          try{
+            this.$axios.get('/issue/'+issueID).then(async(res)=>{
+              /* eslint-disable no-console */
+                console.log(res.data.data);
+                this.editecat = await res.data.data;
+
+                if(this.editecat.length === 0){
+                  alert("something going else")
+
+                }else{
+                  this.showContent = false
+                }
+
+            })
+          }catch{
+
+          }
+
+        },
+
+
+
+
+         updateCategory(issueID){
+
+                  if(this.editecat.Title.length === 0){
+
+                    this.AlertMSG = "This name is required";
+                    this.worningAlert = true
+
+
+                  }else if(this.editecat.Body.length === 0){
+
+                    this.AlertMSG = "This description is required";
+                    this.worningAlert = true
+
+                  }else{
+
+                    this.worningAlert = false
+                    this.$buefy.toast.open(`Your data is sending...`)
+                    this.$axios.put('/issue/'+issueID, this.editecat).then((res)=>{
+
+                      if(res.status === 200){
+                          this.$buefy.toast.open(`Update success!`)
+                      }else{
+                        this.$buefy.toast.open(`Something went wrong... plz try again!`)
+                      }
+
+                  })
+                  }
+        },
+
+
+        cancelRequest(){
+          this.$router.go();
+        },
+
+
+        viewComment(issueID){
+          this.$router.push('/comments/'+issueID);
+       },
   },
 }
 

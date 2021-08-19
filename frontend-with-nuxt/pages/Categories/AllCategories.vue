@@ -7,7 +7,7 @@
         <div class="row">
       <div class="col-lg-12 my-3">
         <div class="pull-right">
-          <p class="title is-1"> Edite category details</p>
+          <p class="title is-1" style="text-align: center;"> Edite category details</p>
 
           <hr/>
         </div>
@@ -16,7 +16,7 @@
 
 
 
-    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:500px; padding-left:30px">
+    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:550px; padding-left:30px">
 
       <div style="width:300px; margin-left:30px">
 
@@ -63,20 +63,7 @@
         <div class="pull-right">
           <p class="title is-1">All Categories</p>
           <hr/>
-          <div id="err msg" class="btn-group">
-            <div v-show="state" class="alert alert-danger" role="alert">
-              {{message}}
-            </div>
-            <div v-show="primarState" class="alert alert-primary" role="alert">
-              {{message}}
-            </div>
-<!--            <button class="btn btn-info" id="list">-->
-<!--              List View-->
-<!--            </button>-->
-<!--            <button class="btn btn-danger" id="grid">-->
-<!--              Grid View-->
-<!--            </button>-->
-          </div>
+
         </div>
       </div>
     </div>
@@ -106,7 +93,7 @@
     </div>
   </div>
   <footer class="card-footer">
-    <button :id="categories.id" class="card-footer-item" style="color:black; border: none; background:white" @click="viewSubCategory($event)">View</button>
+    <button :id="categories.id" type="button" class="card-footer-item" style="color:black; border: none; background:white" data-bs-toggle="tooltip" data-bs-placement="top" title="View sub category" @click="viewSubCategory($event)">View</button>
     <button class="card-footer-item"  style=" border: none; background:white" @click="editeteSubCat(categories.id)">Edit</button>
     <button :id="categories.id" class="card-footer-item"  style="color:red;border: none; background:white " @click="confirmCustomDelete(categories.id)">Delete</button>
   </footer>

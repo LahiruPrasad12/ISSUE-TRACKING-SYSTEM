@@ -7,8 +7,8 @@
         <div class="row">
       <div class="col-lg-12 my-3">
         <div class="pull-right">
-          <p v-if="editecat.Id!==0" class="title is-1"> Edite Sub-category </p>
-          <p v-if="editecat.Id===0" class="title is-1">Add New-subcategory </p>
+          <p v-if="editecat.Id!==0" class="title is-1" style="text-align : center"> Edite Sub-category </p>
+          <p v-if="editecat.Id===0" class="title is-1" style="text-align : center">Add New-subcategory </p>
           <hr/>
         </div>
       </div>
@@ -16,7 +16,7 @@
 
 
 
-    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:500px; padding-left:30px">
+    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:550px; padding-left:30px">
 
       <div style="width:300px; margin-left:30px">
 
