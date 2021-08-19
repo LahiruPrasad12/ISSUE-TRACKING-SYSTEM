@@ -25,7 +25,7 @@
     <div id="products" class="row view-group">
 
 
-      <div class="item col-xs-4 col-lg-4  "  v-for="category in category" style="margin-bottom: 20px; box-shadow: #1a202c">
+      <div class="item col-xs-4 col-lg-4  "  v-for="category in category" v-bind:key="category" style="margin-bottom: 20px; box-shadow: #1a202c" >
         <div class="shadow p-3 mb-5 bg-white rounded">
         <div class="thumbnail card text-dark bg-light ">
           <div class="img-event">
@@ -42,10 +42,10 @@
 <!--                  $21.000</p>-->
               </div>
               <div class="btn-group " >
-                <button class="btn btn-danger" id="grid" @click="deleteCategory($event)" v-bind:id="category.id" v-bind:name="category.name" style="font-size: medium; border-radius: 0px">
+                <button class="btn btn-danger" id="grid" @click="deleteCategory($event)"  v-bind:name="category.name" style="font-size: medium; border-radius: 0px">
                   Delete
                 </button>&emsp;&emsp;&emsp;
-                <button class="btn bg-info" id="list" @click="viewSubCategory($event)" v-bind:id="category.id" style="font-size: medium; border-radius: 0px " >
+                <button class="btn bg-info" id="list" @click="viewSubCategory($event)"  style="font-size: medium; border-radius: 0px ;   " >
                   View Subcategory
                 </button>
 
@@ -64,50 +64,36 @@
 
 
 <script>
-
 export default {
   name: "Allcategories",
-
-
   data(){
     return{
       category:[],
       message : null,
       state : false,
       primarState : false,
-
     }
   },
-
   created() {
-
     try{
       this.$http.get("http://127.0.0.1:8000/api/category").then(function (respond){
         this.category = respond.body.data
-
         if(this.category.length == 0){
           this.message="No more categories "
           this.state = true;
-
         }else{
           this.message="Fetched all categories "
           this.primarState = true;
         }
       })
-
     }catch (err){
       console.log(err)
     }
-
   },
-
   methods:{
     deleteCategory(event){
-
       try{
-
         const x = confirm("Are you sure");
-
         if(x==true){
           this.$http.delete("http://127.0.0.1:8000/api/category/"+event.target.id).then(function (respond){
             var postion = this.category.findIndex(function (element){
@@ -117,28 +103,22 @@ export default {
             this.state = true;
             this.primarState=false;
             this.message="successfully delete "+ '"'+ event.target.name+'"' + " category";
-
           })
         }else {
           this.state = true;
           this.primarState=false;
           this.message="canceled delete "+ '"'+ event.target.name+'"' +" category"
         }
-
       }catch (e) {
         console.log(e)
       }
-
     },
-
     viewSubCategory(event){
       this.$router.push('/subcategory/'+event.target.id);
     }
   }
-
 }
 </script>
 
 <style scoped>
-
 </style>

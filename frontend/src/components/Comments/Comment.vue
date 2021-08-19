@@ -101,7 +101,7 @@
 
     <div class="row d-flex justify-content-center">
 
-      <div class="w-10 p-2" v-for="comments in comments">
+      <div class="w-10 p-2" v-for="comments in comments" v-bind:key="comments">
         <div class="shadow-lg p-1 mb-30 bg-body rounded" >
 
           <p class="fs-2" style="font-family: Abscissa">{{comments.body}}</p>
