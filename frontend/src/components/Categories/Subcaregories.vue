@@ -20,7 +20,7 @@
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Description:</label>
-                <textarea class="form-control" id="message-text" v-model="oneSubCategory.description">{{oneSubCategory.description}}</textarea>
+                <textarea class="form-control" id="message-text" v-model="oneSubCategory.description"></textarea>
               </div>
               <div class="warning" v-show="this.errMsg">{{this.errMessage}}</div>
             </form>
@@ -55,7 +55,7 @@
     </div>
     <div id="products" class="row view-group">
 
-      <div class="item col-xs-4 col-lg-4 " v-for="Subcategory in Subcategory">
+      <div class="item col-xs-4 col-lg-4 " v-for="Subcategory in Subcategory" :key="Subcategory">
         <div class="thumbnail card">
           <div class="img-event">
           </div>
@@ -73,7 +73,7 @@
               <div class="btn-group">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" @click="editeSubCategory($event)" v-bind:id="Subcategory.id" v-bind:name="Subcategory.name">
                   Edit</button>&emsp;&emsp;&emsp;&emsp;&emsp;
-                <button class="btn btn-danger" id="grid" @click="deleteSubategory($event)" v-bind:id="Subcategory.id" v-bind:name="Subcategory.name">
+                <button class="btn btn-danger" id="grid" @click="deleteSubategory(Subcategory.id)" v-bind:name="Subcategory.name">
                   Delete
                 </button>
 
@@ -148,15 +148,15 @@ export default {
 
 
     //This method used to delete some sub categories
-    deleteSubategory(event){
+    deleteSubategory(id){
 
       try{
         const x = confirm("Are you sure");
 
         if(x==true){
-          this.$http.delete("http://127.0.0.1:8000/api/subcategory/"+event.target.id).then(function (respond){
+          this.$http.delete("http://127.0.0.1:8000/api/subcategory/"+id).then(function (respond){
             var postion = this.Subcategory.findIndex(function (element){
-              return element.id == event.target.id;
+              return element.id == id;
             })
             this.Subcategory.splice(postion,1);
             this.state = true;
@@ -165,7 +165,7 @@ export default {
           })
         }else {
           this.state = true;
-          this.message="canceled delete "+ '"'+ event.target.name+'"' +" category"
+          this.message="canceled delete "+ '"'+ id+'"' +" category"
         }
 
       }catch (e) {
