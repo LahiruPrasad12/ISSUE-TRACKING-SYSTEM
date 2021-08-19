@@ -45,7 +45,7 @@
                     <b-icon icon="dots-vertical"></b-icon>
                 </template>
                 <b-dropdown-item aria-role="listitem">Edite</b-dropdown-item>
-                <b-dropdown-item aria-role="listitem" >Delete</b-dropdown-item>
+                <b-dropdown-item aria-role="listitem" @click="confirmCustomDelete(comment.id)">Delete</b-dropdown-item>
             </b-dropdown>
 
     </div>
@@ -150,12 +150,38 @@ export default {
 
     },
 
+
+
+    confirmCustomDelete(commentID) {
+
+       try{
+        this.$buefy.dialog.confirm({
+          title: 'Deleting account',
+          message: 'Are you sure you want to <b>delete</b> this comment? This action cannot be undone.',
+          confirmText: 'Delete Account',
+          type: 'is-danger',
+          hasIcon: true,
+           onConfirm:async ()=>{
+            await this.$axios.delete('/comment/'+commentID).then(async(res)=>{
+
+             const postion = await this.comments.findIndex(x => x.id === commentID)
+
+            this.comments.splice(postion,1);
+            this.$buefy.toast.open('Comment deleted!')
+           })
+          }
+
+
+        })
+       }catch{
+         this.$buefy.toast.open('Something went wrong!')
+       }
+
+    },
+
     closeTextbox(){
       this.$router.go();
     }
-
-
-
   },
 
 }
