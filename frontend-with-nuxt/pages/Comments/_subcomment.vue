@@ -16,7 +16,7 @@
       </b-field>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="closeTextbox()">Close</button>
-        <button v-if="editecomment.id !== 0" type="button" class="btn btn-danger">Save changes</button>
+        <button v-if="editecomment.id !== 0" type="button" class="btn btn-danger" @click="updateComment(editecomment.id)">Save changes</button>
         <button v-if="editecomment.id === 0" type="button" class="btn btn-primary" @click="postComment()">Post comment</button>
       </div>
 
@@ -44,7 +44,7 @@
                 <template #trigger>
                     <b-icon icon="dots-vertical"></b-icon>
                 </template>
-                <b-dropdown-item aria-role="listitem">Edite</b-dropdown-item>
+                <b-dropdown-item aria-role="listitem" @click="editComment(comment.id)">Edite</b-dropdown-item>
                 <b-dropdown-item aria-role="listitem" @click="confirmCustomDelete(comment.id)">Delete</b-dropdown-item>
             </b-dropdown>
 
@@ -178,6 +178,59 @@ export default {
        }
 
     },
+
+
+
+
+
+    editComment(commentID){
+        try{
+
+          this.$axios.get("/comment/"+commentID).then((respond)=>{
+              console.log(respond.data.data)
+              this.editecomment=respond.data.data;
+
+              if(this.editecomment.length !== 0){
+                this.showContent=false;
+              }
+
+          })
+        }catch (err){
+
+        }
+    },
+
+
+
+
+    updateComment(commentID){
+
+      try {
+          if(this.editecomment.Body.length === 0){
+            alert("required")
+
+          }else {
+
+            this.$buefy.toast.open(`Your data is sending...`)
+            this.$axios.put("/comment/"+commentID, this.editecomment ).then((respond)=>{
+                console.log(respond)
+            if(respond.status === 200){
+                this.$buefy.toast.open(`Update comment success!`)
+            }else{
+                this.$buefy.toast.open(`Something went wrong.. pls try again later!`)
+              }
+            })
+          }
+
+      }catch (err){
+          console.log(err)
+      }
+
+    },
+
+
+
+
 
     closeTextbox(){
       this.$router.go();
