@@ -2,45 +2,62 @@
 <div>
 
 
+    <section v-show="!showContent">
 
-  <!--This part used to diaplay pop up box to edite some details-->
-      <!---This part used display pop up box -->
-    <div id="exampleModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 id="exampleModalLabel" class="modal-title"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Name:</label>
-                <input id="recipient-name" type="text" class="form-control" />
+        <div class="row">
+      <div class="col-lg-12 my-3">
+        <div class="pull-right">
+          <p class="title is-1"> Edite category details</p>
 
-              </div>
-              <div class="mb-3">
-                <label for="message-text" class="col-form-label">Description:</label>
-                <textarea id="message-text" class="form-control"></textarea>
-              </div>
-
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-danger">Update Data</button>
-          </div>
+          <hr/>
         </div>
       </div>
     </div>
 
 
 
+    <div  class="shadow-lg p-3 mb-5 bg-body rounded" style="width:400px; margin-left:500px; padding-left:30px">
+
+      <div style="width:300px; margin-left:30px">
+
+
+        <b-field label="Name">
+            <b-input v-model="editecat.name"
+                type="text"
+                value="john@" maxlength="30">
+            </b-input>
+        </b-field>
+
+        <b-field label="Message">
+            <b-input v-model="editecat.description" maxlength="200" type="textarea"></b-input>
+        </b-field>
+
+
+        <div v-show="worningAlert" class="alert alert-danger" role="alert">
+            {{AlertMSG}}
+        </div>
+
+
+          <div class="buttons" style="margin-left:90px">
+
+            <b-button type="is-success" outlined @click="cancelRequest()">Cancel</b-button>
+           <b-button type="is-danger" outlined @click="updateCategory(editecat.id)">Update data</b-button>
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+    </section>
+
+
 
 
 
   <!--All category retrieve here-->
-  <div class="container">
+  <div v-show="showContent" class="container">
     <div class="row">
       <div class="col-lg-12 my-3">
         <div class="pull-right">
@@ -90,7 +107,7 @@
   </div>
   <footer class="card-footer">
     <button :id="categories.id" class="card-footer-item" style="color:black; border: none; background:white" @click="viewSubCategory($event)">View</button>
-    <button class="card-footer-item"  style=" border: none; background:white" >Edit</button>
+    <button class="card-footer-item"  style=" border: none; background:white" @click="editeteSubCat(categories.id)">Edit</button>
     <button :id="categories.id" class="card-footer-item"  style="color:red;border: none; background:white " @click="confirmCustomDelete(categories.id)">Delete</button>
   </footer>
 </div>
@@ -117,10 +134,19 @@ export default {
         mountains: [],
         categories : [],
         deletCate : [],
+      editecat : {
+        id : 0,
+        name : '',
+        description : ''
+      },
         name : "lahiru",
         message: null,
         state: false,
         primarState: false,
+
+        showContent : true,
+        worningAlert : false,
+        AlertMSG : null
       }
   },
   async mounted() {
@@ -171,7 +197,71 @@ export default {
 
      viewSubCategory(event){
       this.$router.push('/categories/'+event.target.id);
-    }
+    },
+
+
+
+
+     editeteSubCat(subCatId){
+
+          try{
+            this.$axios.get('/category/'+subCatId).then(async(res)=>{
+              /* eslint-disable no-console */
+                console.log(res.data.data);
+                this.editecat = await res.data.data;
+
+                if(this.editecat.length === 0){
+                  alert("something going else")
+
+                }else{
+                  this.showContent = false
+                }
+
+            })
+          }catch{
+
+          }
+
+        },
+
+
+
+          updateCategory(subCatID){
+
+                  if(this.editecat.name.length === 0){
+
+                    this.AlertMSG = "This name is required";
+                    this.worningAlert = true
+
+
+                  }else if(this.editecat.description.length === 0){
+
+                    this.AlertMSG = "This description is required";
+                    this.worningAlert = true
+
+                  }else{
+
+                    this.worningAlert = false
+                    this.$buefy.toast.open(`Your data is sending...`)
+                    this.$axios.put('/category/'+subCatID, this.editecat).then((res)=>{
+
+                      if(res.status === 200){
+                          this.$buefy.toast.open(`Update success!`)
+                      }else{
+                        this.$buefy.toast.open(`Something went wrong... plz try again!`)
+                      }
+
+                  })
+                  }
+
+
+
+        },
+
+
+        cancelRequest(){
+          this.$router.go();
+        }
 
 
   }
