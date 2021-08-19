@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-12 my-3">
         <div class="pull-right">
-          <p class="title is-1">All Categories</p>
+          <p class="title is-1">Sub Categories</p>
           <hr/>
           <div class="btn-group" id="err msg">
             <div class="alert alert-danger" role="alert" v-show="this.state">
@@ -31,7 +31,7 @@
 
 
       <div class="item col-xs-4 col-lg-4  "  v-for="subcat in subcat" v-bind:key="subcat.id" style="margin-bottom: 20px; box-shadow: #1a202c" >
-        
+
     <div class="card" style="width:400px">
   <header class="card-header" style="text-align: center">
     <p class="subtitle is-4">
@@ -56,8 +56,8 @@
     <button class="card-footer-item" style="color:red;border: none; background:white "  v-bind:id="subcat.id">Delete</button>
   </footer>
 </div>
-         
-     
+
+
 
       </div>
     </div>
@@ -86,17 +86,23 @@ export default {
     return{
       slug : this.$route.params,
       subcat : [],
+      allSubCat : []
     }
   },
 
 
-    created(){
-       this.$axios.get('/Subcategory/render/'+this.$route.params.subcategory).then(async function(res){
-        console.log(res.data);
-        this.subcat = await res.data;
-    })
-      
+    async fetch(){
+
+      this.allSubCat = await this.fetchAllSubCategories();
+      this.subcat = this.allSubCat.data
+
     },
+
+    methods:{
+          async fetchAllSubCategories(){
+         return await this.$axios.get('Subcategory/render/'+this.$route.params.subcategory);
+      }
+    }
 }
 </script>
 
