@@ -25,7 +25,7 @@
 
 
 
-    <div v-show="showContent"  style="margin-top:250px">
+    <div v-show="showContent">
 
         <b-tooltip
             label="Add your new comment regarding this issue"
