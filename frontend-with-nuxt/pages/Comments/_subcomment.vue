@@ -1,5 +1,5 @@
 <template>
-  <div class="container" >
+  <div class="container"  style="margin-top:250px">
       <p class="title is-1" style="text-align : center"> Comments under one Issue </p>
        <hr/>
 
@@ -25,7 +25,7 @@
 
 
 
-    <div v-show="showContent">
+    <div v-show="showContent"  style="margin-top:250px">
 
         <b-tooltip
             label="Add your new comment regarding this issue"

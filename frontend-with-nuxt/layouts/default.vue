@@ -7,7 +7,7 @@
 <div id="navbar">
   <a id="logo" href="#default">10QBIT COMPANY</a>
   <div id="navbar-right">
-    <nuxt-link to="/" class="active">Home</nuxt-link>
+    <nuxt-link to="/" >Home</nuxt-link>
     <nuxt-link to="/categories/allcategories">All Categories</nuxt-link>
       <nuxt-link to="/issues/allisuue">All Issues</nuxt-link>
      <nuxt-link to="/contact">Contact us</nuxt-link>
@@ -43,7 +43,7 @@ function scrollFunction() {
 <style scoped>
 
 #navbar {
-  background-color: #333;
+  background-color: rgb(0, 223, 223);
   overflow: hidden;
   padding: 90px 10px; /* Large padding which will shrink on scroll (using JS) */
   transition: 0.4s; /* Adds a transition effect when the padding is decreased */
@@ -58,23 +58,26 @@ function scrollFunction() {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
 #navbar #logo {
-  font-size: 35px;
+  font-size: 60px;
   font-weight: bold;
   transition: 0.4s;
+  color: black;
 }
 
 #navbar a:hover {
-  background-color: #ddd;
+  background-color: rgba(0, 0, 0, 0);
   color: black;
 }
 
 /* Style the active/current link */
 #navbar a.active {
-  background-color: #04AA6D;
+  background-color: #000;
   color: white;
 }
 

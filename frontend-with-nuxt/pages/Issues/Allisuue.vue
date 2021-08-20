@@ -2,7 +2,7 @@
 <div>
 
 
-    <section v-show="!showContent">
+    <section v-show="!showContent"  style="margin-top:250px">
 
         <div class="row">
       <div class="col-lg-12 my-3">
@@ -57,7 +57,7 @@
 
 
   <!--All category retrieve here-->
-  <div v-show="showContent" class="container">
+  <div v-show="showContent" class="container"  style="margin-top:250px">
     <div class="row">
       <div class="col-lg-12 my-3">
         <div class="pull-right">
