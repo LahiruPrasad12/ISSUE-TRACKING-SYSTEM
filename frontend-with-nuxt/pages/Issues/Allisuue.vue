@@ -74,10 +74,10 @@
 
       <div v-for="issue in issues"  :key="issue.id" class="item col-xs-4 col-lg-4  " style="margin-bottom: 20px; box-shadow: #1a202c" >
 
-    <div class="card" style="width:400px">
+    <div class="card" style="width:400px; background-color:#C0C0C0">
   <header class="card-header" style="text-align: center">
-    <p class="subtitle is-4">
-      {{issue.Title}}
+    <p class="subtitle is-4" style="color: black;">
+      <b>{{issue.Title}}</b>
     </p><hr>
     <button class="card-header-icon" aria-label="more options">
       <span class="icon">
@@ -85,7 +85,7 @@
       </span>
     </button>
   </header>
-  <div class="card-content">
+  <div class="card-content" style="color: black;">
     <div class="content">
       {{issue.Body}}
       <br> <br>
@@ -94,7 +94,9 @@
   </div>
   <footer class="card-footer">
     <button class="card-footer-item" style="color:black; border: none; background:white" @click="viewComment(issue.id)">View</button>
+    <div class="verticalLine"></div>
     <button class="card-footer-item"  style=" border: none; background:white" @click="editeIssue(issue.id)">Edit</button>
+    <div class="verticalLine"></div>
     <button class="card-footer-item"  style="color:red;border: none; background:white " @click="confirmCustomDelete(issue.id)">Delete</button>
   </footer>
 </div>
@@ -252,3 +254,14 @@ export default {
 }
 
 </script>
+
+
+
+
+
+<style scoped>
+.verticalLine {
+        border-left: 4px solid #4b42f5;
+        height: fit-content;
+      }
+</style>

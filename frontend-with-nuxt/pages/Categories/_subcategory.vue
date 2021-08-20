@@ -45,9 +45,6 @@
             &emsp; <b-button v-if="editecat.Id===0" type="is-danger" outlined @click="addCategory(editecat.Id)">Post data</b-button>
 
         </div>
-
-
-
       </div>
     </div>
     </section>
@@ -76,17 +73,26 @@
         </div>
       </div>
     </div>
-    <div id="products" class="row view-group">
+
+            <b-tooltip
+            label="Add your new subcategory under this issue"
+            size="is-small"
+            multilined>
+            <b-button type="is-success" outlined label="Add New Subcategory" @click="addNewComment()" />
+        </b-tooltip>
+
+
+    <div id="products" class="row view-group" style="margin-top:50px;">
 
 
 
 
       <div v-for="subcategory in subcat"  :key="subcategory.id" class="item col-xs-4 col-lg-4  " style="margin-bottom: 20px; box-shadow: #1a202c" >
 
-    <div class="card" style="width:400px">
-  <header class="card-header" style="text-align: center">
-    <p class="subtitle is-4">
-      {{subcategory.name}}
+    <div class="card" style="width:400px; background-color:#C0C0C0">
+  <header class="card-header" style="text-align: center; ">
+    <p class="subtitle is-4" style="color: black;">
+      <b>{{subcategory.name}}</b>
     </p><hr>
     <button class="card-header-icon" aria-label="more options">
       <span class="icon">
@@ -94,17 +100,18 @@
       </span>
     </button>
   </header>
-  <div class="card-content">
-    <div class="content">
+  <div class="card-content" style="color: black;">
+    <div class="content" >
       {{subcategory.description}}
       <br>
       <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
     </div>
   </div>
   <footer class="card-footer">
-    <button :id="subcat.id" class="card-footer-item" style="color:black; border: none; background:white" @click="addSubCategory()">Add</button>
-    <button class="card-footer-item"  style=" border: none; background:white" @click="editeteSubCat(subcategory.id)" >Edit</button>
-    <button class="card-footer-item" style="color:red;border: none; background:white "  @click="confirmCustomDelete(subcategory.id)">Delete</button>
+    <!-- <button :id="subcat.id" class="card-footer-item" style="color:black; border: none; background:white" @click="addSubCategory()">Add</button> -->
+    <button class="card-footer-item"  style=" border: none" @click="editeteSubCat(subcategory.id)" >Edit</button>
+    <div class="verticalLine"></div>
+    <button class="card-footer-item" style="color:red;border: none "  @click="confirmCustomDelete(subcategory.id)">Delete</button>
   </footer>
 </div>
 
@@ -311,3 +318,9 @@ export default {
 </script>
 
 
+<style scoped>
+.verticalLine {
+        border-left: 4px solid #4b42f5;
+        height: fit-content;
+      }
+</style>
