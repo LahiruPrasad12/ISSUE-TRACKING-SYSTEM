@@ -39,19 +39,19 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SubCategoryRequest $request)
+    public function store(SubCategoryRequest $request,$id)
     {
-        $post = Category::first();
+        $post = Category::find($id);
         $issue = Issues::first();
         $sub = Subcategories::first();
         $comment = new Subcategories();
-        $comment->name = $request->name;
+        $comment->name = $request->Name;
         $comment->description = $request->description;
 
         if($post->subCategory()->save($comment)){
 
             $sub->issues()->attach($issue);
-            return new SubCategoryResource($comment);
+            return "Add Success";
         }
     }
 

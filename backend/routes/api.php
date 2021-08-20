@@ -44,6 +44,8 @@ Route::get('comments/issue/{id}',[CommentController::class,'getCommentUsingPostI
 //This route for add  new comment
 Route::post('/comment/{id}', [CommentController::class,'store']);
 
+
+Route::post('/Subcategory/{id}',[SubCategoryController::class,'store']);
 ///*-----------------------------------------Add Data-----------------------------------------*/
 //
 //////this route used to add data to the Issues table
