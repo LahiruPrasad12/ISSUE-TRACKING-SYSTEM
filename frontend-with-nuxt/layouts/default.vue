@@ -45,7 +45,7 @@ function scrollFunction() {
 #navbar {
   background-color: rgb(0, 223, 223);
   overflow: hidden;
-  padding: 90px 10px; /* Large padding which will shrink on scroll (using JS) */
+  padding: 50px 10px; /* Large padding which will shrink on scroll (using JS) */
   transition: 0.4s; /* Adds a transition effect when the padding is decreased */
   position: fixed; /* Sticky/fixed navbar */
   width: 100%;
@@ -64,7 +64,7 @@ function scrollFunction() {
 }
 
 #navbar #logo {
-  font-size: 60px;
+  font-size: 35px;
   font-weight: bold;
   transition: 0.4s;
   color: black;
