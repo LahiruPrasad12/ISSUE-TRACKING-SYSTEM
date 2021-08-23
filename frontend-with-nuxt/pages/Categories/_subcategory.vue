@@ -83,23 +83,21 @@
       <div class="row">
         <div class="col-lg-12 my-3">
           <div class="pull-right">
-            <p class="title is-1">Sub Categories</p>
-            <hr />
-            <div id="err msg" class="btn-group">
-              <div v-show="state" class="alert alert-danger" role="alert">
-                {{ message }}
-              </div>
-              <div
-                v-show="primarState"
-                class="alert alert-primary"
-                role="alert"
-              >
-                {{ message }}
-              </div>
-            </div>
+            <p class="title is-1 float-left">Sub Categories</p>
+
+            <form class="w-25 p-3 float-right">
+              <input
+                v-model="search"
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </form>
           </div>
         </div>
       </div>
+      <hr />
 
       <b-tooltip
         label="Add your new subcategory under this issue"
@@ -116,7 +114,7 @@
 
       <div id="products" class="row view-group" style="margin-top: 50px">
         <div
-          v-for="subcategory in subcat"
+          v-for="subcategory in filterBlog"
           :key="subcategory.id"
           class="item col-xs-4 col-lg-4"
           style="margin-bottom: 20px; box-shadow: #1a202c"
@@ -185,26 +183,33 @@ export default {
       worningAlert: false,
       AlertMSG: null,
       editSubCatStatus: false,
+
+      search: '',
     }
   },
 
   async fetch() {
-    this.allSubCat = await this.fetchAllSubCategories()
+    try {
+      this.subcat = (
+        await this.$axios.get(
+          'Subcategory/render/' + this.$route.params.subcategory
+        )
+      ).data
+    } catch {}
+  },
 
-    if (this.allSubCat.data.length !== 0) {
-      this.subcat = this.allSubCat.data
-    } else {
-      this.alertCustom()
-    }
+  computed: {
+    filterBlog() {
+      return this.subcat.filter((SubCategor) =>
+        SubCategor.name
+          .toLowerCase()
+          .toUpperCase()
+          .includes(this.search.toLowerCase().toUpperCase())
+      )
+    },
   },
 
   methods: {
-    async fetchAllSubCategories() {
-      return await this.$axios.get(
-        'Subcategory/render/' + this.$route.params.subcategory
-      )
-    },
-
     alertCustom() {
       this.$buefy.dialog.alert({
         title: 'Title Alert',
